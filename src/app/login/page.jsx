@@ -43,7 +43,7 @@ export default function Login() {
               กรุณากรอก Username และ Password เพื่อเข้าสู่ระบบ
             </div>
             <div className="mt-10">
-              <form method="POST" action="#" onClick={handleSubmit}>
+              <form method="POST" action="#" onSubmit={handleSubmit}>
                 <div className="flex flex-col mb-5">
                   <label
                     className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"

@@ -12,10 +12,10 @@ import axios from 'axios'
 
 
 const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'Review', href: '/review', current: false },
-  { name: 'Product', href: '/product', current: false },
-  { name: 'Contact', href: '/contact', current: false },
+  { name: 'หน้าแรก', href: '/', current: false },
+  { name: 'รีวิว', href: '/review', current: false },
+  { name: 'ซื้อสินค้า', href: '/product', current: false },
+  { name: 'ติดต่อ', href: '/contact', current: false },
 ]
 
 function classNames(...classes) {
@@ -160,7 +160,7 @@ export default function Navbar() {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
+                                href="/"
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                 onClick={() => signOut({ callbackUrl: '/', redirect: true })}
                               >

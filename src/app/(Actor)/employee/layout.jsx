@@ -1,6 +1,7 @@
 "use client";
 
-import Sidebar from './sidebar';
+import Sidebar from "@/components/Sidebar";
+
 
 
 export default function Layout({ children }) {

@@ -2,6 +2,7 @@
 import Provider from "@/components/Provider";
 import '../styles/globals.css'
 import Navbar from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Ticket",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
             <main className="app">
               <Navbar />
               {children}
+              <Footer/>
             </main>
           </div>
         </Provider>

@@ -64,7 +64,8 @@ const HomePage = () => {
     return (
         <>
             {/* <Backgroud/> */}
-            <section className="mt-2 relative container rounded-full lg:px-8 mx-auto bg-white/50">
+            <section className="mt-2 relative container rounded-md lg:px-8 mx-auto bg-white/50">
+            <hr className="dark:border-gray-700/60" />
                 <div className="px-4 sm:px-6 lg:px-8">
                     <div className='grid grid-cols-2 gap-2'>
                         <h1 className="py-6 lg:text-2xl font-bold dark:text-white xs:text-xs">รายการการแสดงที่จะมาเร็วๆนี้</h1>
@@ -99,7 +100,7 @@ const HomePage = () => {
                                         </div>
                                         <div className='grid grid-cols-2 gap-2 mt-6'>
                                             <div className="p-1 items-center leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                                                <span className="flex rounded-full bg-red-900 uppercase text-indigo-100 px-2 py-1 text-xs font-bold mr-1">New</span>
+                                                <span className="flex rounded-full bg-red-700 uppercase text-indigo-100 px-2 py-1 text-xs font-bold mr-1">New</span>
                                                 <span className="font-semibold mr-2 text-left text-emerald-500 flex-auto">{item.ticketname}</span>
                                             </div>
                                             <h3 className="text-sm text-gray-500 text-end">
