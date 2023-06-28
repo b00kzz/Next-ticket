@@ -7,15 +7,15 @@ import { signIn, signOut } from "next-auth/react";
 import PersonIcon from '@mui/icons-material/Person';
 import Link from 'next/link'
 import axios from 'axios'
-
+import { AiFillHome } from 'react-icons/ai'
 // import './globals.css'
 
 
 const navigation = [
-  { name: 'หน้าแรก', href: '/', current: false },
-  { name: 'รีวิว', href: '/review', current: false },
-  { name: 'ซื้อสินค้า', href: '/product', current: false },
-  { name: 'ติดต่อ', href: '/contact', current: false },
+  { name: 'หน้าแรก', href: '/', current: true, icon: <AiFillHome /> },
+  { name: 'รีวิว', href: '/review', current: false, icon: 'home' },
+  { name: 'ซื้อสินค้า', href: '/product', current: false, icon: 'home' },
+  { name: 'ติดต่อ', href: '/contact', current: false, icon: 'home' },
 ]
 
 function classNames(...classes) {
@@ -29,7 +29,7 @@ export default function Navbar() {
   const [user, setUser] = useState({})
   const { data: session } = useSession()
   const api = process.env.API_ENDPOINT;
-  
+
   useEffect(() => {
     // loadData(userid)
   }, []);
@@ -87,7 +87,7 @@ export default function Navbar() {
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current ? 'bg-gray-900 font-bold text-blue-500' : 'text-blue-500 hover:bg-blue-600 hover:text-white',
+                            item.current ? 'text-blue-500 hover:bg-blue-600 hover:text-white' : 'text-blue-500 hover:bg-blue-600 hover:text-white',
                             'rounded-md px-3 py-2 font-bold text-md'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -129,7 +129,7 @@ export default function Navbar() {
                             {({ active }) => (
 
                               <Link
-                                href={session?.user.roleid === 'Admin' ? '/admin/manage' : '/' && session?.user.roleid === 'Employee' ? '/employee/manage/'+ session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/history/' + session.user.userid : ''}
+                                href={session?.user.roleid === 'Admin' ? '/admin/manage' : '/' && session?.user.roleid === 'Employee' ? '/employee/manage/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/history/' + session.user.userid : ''}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
 
                               >

@@ -10,7 +10,8 @@ const HomePage = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [query, setQuery] = useState("");
-    console.log("🚀 ~ file: Homepage.jsxx:12 ~ HomePage ~ items:", items)
+    // ctrl + alt + l
+    // console.log("🚀 ~ file: Homepage.jsx:13 ~ HomePage ~ query:", query)
 
     const api = process.env.API_ENDPOINT;
 

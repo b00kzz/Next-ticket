@@ -1,4 +1,5 @@
 "use client"
+
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/min/locales';
@@ -16,6 +17,8 @@ const ticket = () => {
   const [item1, setItem1] = useState([])
   const { userid } = useParams();
   const [query, setQuery] = useState("");
+  const [message, setMessage] = useState("")
+  const token = process.env.LINE_TOKEN;
   const api = process.env.API_ENDPOINT;
 
 
@@ -63,6 +66,29 @@ const ticket = () => {
       })
   }
 
+  const handleSearch = async (e) => {
+    const prop = e.target.value;
+    // console.log(prop);
+    setQuery(prop);
+  };
+
+  // const LineNotify = async (token, message) => {
+  //   try {
+  //     const res = await axios({
+  //       method: "POST",
+  //       url: "https://notify-api.line.me/api/notify",
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         "Authorization": `Bearer ${token}`,
+  //         "Access-Control-Allow-Origin": "*",
+  //         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+  //       },
+  //       data: "message=" + message
+  //     })
+  //   } catch (error) {
+  //   }
+  // }
+
   async function handleChangesStatus(e, ticketid) {
     const status = e.target.checked;
 
@@ -78,11 +104,6 @@ const ticket = () => {
       })
   }
 
-  const handleSearch = async (e) => {
-    const prop = e.target.value;
-    // console.log(prop);
-    setQuery(prop);
-  };
 
   async function handleChangeStatus(e, ticketid) {
     const sellstatus = e.target.checked;
@@ -91,8 +112,10 @@ const ticket = () => {
       .then(res => {
         // console.log(res);
         if (userid === undefined) {
+          // LineNotify(token, message)
           loadData()
         } else {
+          // LineNotify(token, message)
           loadDataByid(userid)
         }
       })
@@ -171,69 +194,69 @@ const ticket = () => {
           <tbody>
             {item.map((res, index) => (
               res.ticketname.toLowerCase().includes(query.toLowerCase()) &&
-                <tr key={index} className='dark:text-white whitespace-nowrap bg-slate-300/30 hover:bg-violet-100'>
-                  <th scope="row">{index + 1}</th>
-                  <td>{res.ticketname}</td>
-                  <td>{res.ticketprice}</td>
-                  <td>
-                    <select className="form-select text-warning bg-slate-800"
-                      onChange={(e) => handleChangesType(e, res.ticketid)}
-                      value={res.tickettype}
-                      key={index}
-                      readOnly
-                    >
-                      {type.map((type, index) =>
+              <tr key={index} className='dark:text-white whitespace-nowrap bg-slate-300/30 hover:bg-violet-100'>
+                <th scope="row">{index + 1}</th>
+                <td>{res.ticketname}</td>
+                <td>{res.ticketprice}</td>
+                <td>
+                  <select className="form-select text-warning bg-slate-800"
+                    onChange={(e) => handleChangesType(e, res.ticketid)}
+                    value={res.tickettype}
+                    key={index}
+                    readOnly
+                  >
+                    {type.map((type, index) =>
 
-                        <option readOnly key={index} value={type.value}>{type.value}</option>
-                      )}
-                    </select>
-                  </td>
-                  <td>
-                    {res.ticketdesc}
-                  </td>
-                  <td>
-                    {moment(res.createddate).locale('th').format('lll' + ' น.')}
-                  </td>
-                  <td>
-                    {res.createdby}
-                  </td>
-                  <td>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox" value={res.status}
-                        className="sr-only peer" checked={res.status}
-                        onChange={(e) => handleChangesStatus(e, res.ticketid)}
+                      <option readOnly key={index} value={type.value}>{type.value}</option>
+                    )}
+                  </select>
+                </td>
+                <td>
+                  {res.ticketdesc}
+                </td>
+                <td>
+                  {moment(res.createddate).locale('th').format('lll' + ' น.')}
+                </td>
+                <td>
+                  {res.createdby}
+                </td>
+                <td>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox" value={res.status}
+                      className="sr-only peer" checked={res.status}
+                      onChange={(e) => handleChangesStatus(e, res.ticketid)}
 
-                      />
-                      <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
-                    </label>
-                  </td>
-                  <td>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox" value={res.sellstatus}
-                        className="sr-only peer" checked={res.sellstatus}
-                        onChange={(e) => handleChangeStatus(e, res.ticketid)}
-
-                      />
-                      <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
-                    </label>
-                  </td>
-                  <td>
+                    />
+                    <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                  </label>
+                </td>
+                <td>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox" value={res.sellstatus}
+                      className="sr-only peer" checked={res.sellstatus}
+                      onChange={(e) => handleChangeStatus(e, res.ticketid)}
+                      onClick={(e) => setMessage(`${res.ticketname} ได้ทำการเปิดขายแล้วในขณะนี้สามารถทำการสั่งซื้อได้แล้ววันนี้`)}
+                    />
+                    <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                  </label>
+                </td>
+                <td>
                   <button
                     onClick={() => handleDelete(res.ticketid)}
-                    type="button" 
-                  className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ลบ</button>
+                    type="button"
+                    className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ลบ</button>
 
 
-                    {/* <Link
+                  {/* <Link
                     className="col-6"
                     href={"Employee/editticket/" + res.ticketid}
                     >
                     <i className="bi bi-pencil-square text-warning"></i>
                   </Link> */}
-                  </td>
-                </tr>
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>

@@ -5,6 +5,8 @@ import moment from 'moment';
 import 'moment/min/locales';
 import Swal from 'sweetalert2';
 import { FaTrashAlt } from 'react-icons/fa';
+import { lineNotify } from '@/pages/api/line/notify';
+const token = "gnS0rBXomqz9NUEvqyqSe9kcJsnY0jtnN8Ej7awmVnh"
 
 
 
@@ -43,6 +45,7 @@ const manage = () => {
     console.log({ roleid }, userid);
     axios.put(api + "user/role/" + userid, { roleid })
       .then(res => {
+        lineNotify(token,"test1")
         // console.log(res);
         loadData();
       })
