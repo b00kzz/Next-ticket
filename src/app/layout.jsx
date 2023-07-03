@@ -1,6 +1,6 @@
 
-import Provider from "@/components/Provider";
 import '../styles/globals.css'
+import Provider from "@/components/Provider";
 import Navbar from "@/components/Nav";
 import Footer from "@/components/Footer";
 

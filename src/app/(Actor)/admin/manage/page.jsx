@@ -14,14 +14,24 @@ const token = "gnS0rBXomqz9NUEvqyqSe9kcJsnY0jtnN8Ej7awmVnh"
 
 
 const manage = () => {
+  // const totalSales = item.reduce((total, currentItem) => total + currentItem.ticketprice, 0);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [item, setItem] = useState([])
   const [query, setQuery] = useState("");
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const employeeCount = item.filter(user => user.roleid === "Employee").length;
+  const banned = item.filter(user => user.status === false).length;
   const api = process.env.API_ENDPOINT;
 
   useEffect(() => {
-    loadData()
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    loadData();
+    return () => {
+      clearInterval(timer);
+    };
   }, [])
 
   const loadData = async () => {
@@ -45,7 +55,7 @@ const manage = () => {
     console.log({ roleid }, userid);
     axios.put(api + "user/role/" + userid, { roleid })
       .then(res => {
-        lineNotify(token,"test1")
+        lineNotify(token, "test1")
         // console.log(res);
         loadData();
       })
@@ -102,6 +112,25 @@ const manage = () => {
 
   return (
     <section>
+      <div className="stats shadow flex-center">
+        <div className="stat place-items-center">
+          <div className="stat-title">จำนวนผู้ใช้ทั้งหมด</div>
+          <div className="stat-value">{item.length}</div>
+          <div className="stat-desc">เวลาอ้างอิง: {currentTime.toLocaleTimeString()}</div>
+        </div>
+
+        <div className="stat place-items-center">
+          <div className="stat-title">จำนวนผู้ใช้ที่ถูกแบน</div>
+          <div className="stat-value text-secondary">{banned}</div>
+          <div className="stat-desc text-secondary">คน</div>
+        </div>
+
+        <div className="stat place-items-center">
+          <div className="stat-title">พนักงาน</div>
+          <div className="stat-value">{employeeCount}</div>
+          <div className="stat-desc">จำนวนพนักงานที่ลงทะเบียน</div>
+        </div>
+      </div>
       <div className='grid grid-cols-2 gap-2 mt-6'>
         <h2 className="text-2xl lg:font-bold tracking-tight dark:text-white xs:text-md xs:font-medium">Manage User</h2>
         <form className="flex items-center">

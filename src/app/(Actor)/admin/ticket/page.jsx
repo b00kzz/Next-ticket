@@ -17,7 +17,7 @@ const ticket = () => {
   const [item1, setItem1] = useState([])
   const { userid } = useParams();
   const [query, setQuery] = useState("");
-  const [message, setMessage] = useState("")
+  const [count, setCount] = useState(1);
   const token = process.env.LINE_TOKEN;
   const api = process.env.API_ENDPOINT;
 
@@ -104,6 +104,9 @@ const ticket = () => {
       })
   }
 
+  
+
+
 
   async function handleChangeStatus(e, ticketid) {
     const sellstatus = e.target.checked;
@@ -123,7 +126,7 @@ const ticket = () => {
 
   async function handleDelete(ticketid) {
     Swal.fire({
-      title: 'ต้องการลบผู้ใช้หรือไม่',
+      title: 'ต้องการลบรายการ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -148,6 +151,7 @@ const ticket = () => {
       }
     })
   }
+
 
   const type = [{ value: "หมอลำ" }, { value: "นักร้องลูกทุ่ง" }, { value: "นักร้องเดี่ยว" }, { value: "ออนไลน์" }, { value: "ทั่วไป" }]
 
@@ -185,6 +189,7 @@ const ticket = () => {
               <th scope="col">หมวดหมู่</th>
               <th scope="col">รายละเอียด</th>
               <th scope="col">วันที่</th>
+              <th scope="col">ยอดขาย</th>
               <th scope="col">โดย</th>
               <th scope="col">แสดง</th>
               <th scope="col">ขาย</th>
@@ -218,6 +223,9 @@ const ticket = () => {
                   {moment(res.createddate).locale('th').format('lll' + ' น.')}
                 </td>
                 <td>
+                  {res.count}
+                </td>
+                <td>
                   {res.createdby}
                 </td>
                 <td>
@@ -237,7 +245,7 @@ const ticket = () => {
                       type="checkbox" value={res.sellstatus}
                       className="sr-only peer" checked={res.sellstatus}
                       onChange={(e) => handleChangeStatus(e, res.ticketid)}
-                      onClick={(e) => setMessage(`${res.ticketname} ได้ทำการเปิดขายแล้วในขณะนี้สามารถทำการสั่งซื้อได้แล้ววันนี้`)}
+                      // onClick={(e) => setMessage(`${res.ticketname} ได้ทำการเปิดขายแล้วในขณะนี้สามารถทำการสั่งซื้อได้แล้ววันนี้`)}
                     />
                     <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
                   </label>

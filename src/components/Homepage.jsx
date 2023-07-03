@@ -79,7 +79,7 @@ const HomePage = () => {
                                 </div>
                                 <input type="text" id="simple-search" onChange={handleSearch} value={query} className="lg:h-10 xs:plassholder-xs xs:h-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ค้นหาชื่อรายการ" required />
                             </div>
-                            <button type="submit" onClick={loadData} className="lg:p-2.5 xs:p-0.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <button type="submit" onClick={() => {setQuery(""),loadData()}}  className="lg:p-2.5 xs:p-0.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 
                                 <label>รีเฟรช</label>
                             </button>

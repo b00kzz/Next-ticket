@@ -16,5 +16,4 @@ exports.lineNotify = async (token,message) => {
     } catch (error) {
     console.log("🚀 ~ file: notify.js:15 ~ exports.lineNotify= ~ error:", error)
     }
-
 }

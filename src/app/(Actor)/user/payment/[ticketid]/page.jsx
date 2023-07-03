@@ -26,10 +26,8 @@ const payment = () => {
 
         loadPayments();
         loadData(ticketid);
-        console.clear();
     }, []);
 
-    console.log("payment", payment);
     const loadData = async (ticketid) => {
         const response = await axios.get(api + "ticket/" + ticketid)
             .then(res => {
@@ -92,6 +90,10 @@ const payment = () => {
         }).then(async resp => {
             // console.log("formData", formData);
             e.preventDefault();
+            const countsell = await axios.put(api + "ticket/count/" + item.ticketid).then(res => { console.log(res) }).catch(err => {
+                setError(err)
+                // console.log(err);
+            })
             const postData = await fetch(api + "payment", {
                 method: 'POST',
                 body: JSON.stringify({
@@ -128,12 +130,11 @@ const payment = () => {
 
     }
 
-    console.clear()
+    // console.clear()
     return (
         <>
             {payment.map((pay, index) => (
-                <>
-                    {console.clear()}
+                <div key={index}>
                     {pay.userid === session?.user.userid && pay.ticketid === item.ticketid && Swal.fire({
                         title: 'คุณได้ทำรายการนี้ไปแล้ว',
                         text: 'กรุณาตรวจสอบที่ประวัติการซื้อ',
@@ -143,10 +144,10 @@ const payment = () => {
                         allowOutsideClick: false,
                     }).then(async (result) => {
                         if (result.isConfirmed) {
-                           await window.location.replace("/user/history/" + session?.user.userid)
+                            await window.location.replace("/user/history/" + session?.user.userid)
                         }
                     })}
-                </>
+                </div>
             ))}
             <div className='grid lg:grid-cols-2 lg:gap-2'>
                 <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -170,7 +171,7 @@ const payment = () => {
                                     <input
                                         name='ticketname'
                                         type='text'
-                                        value={item.ticketname}
+                                        defaultValue={item.ticketname}
                                         onChange={(e) => setFormData(e.target.value)}
                                         readOnly
                                         className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -184,8 +185,8 @@ const payment = () => {
                                 <div className="mt-2">
                                     <input
                                         name='ticketprice'
-                                        type='text'
-                                        value={item.ticketprice}
+                                        type='number'
+                                        defaultValue={item.ticketprice}
                                         onChange={(e) => setFormData(e.target.value)}
                                         readOnly
                                         className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -200,7 +201,7 @@ const payment = () => {
                                     <input
                                         name='tickettype'
                                         type='text'
-                                        value={item.tickettype}
+                                        defaultValue={item.tickettype}
                                         onChange={(e) => setFormData(e.target.value)}
                                         readOnly
                                         className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -214,7 +215,7 @@ const payment = () => {
                                 </label>
                                 <div className="mt-2">
                                     <input
-                                        value={session?.user.nickname}
+                                        defaultValue={session?.user.nickname}
                                         onChange={(e) => setFormData(e.target.value)}
                                         name='nickname'
                                         type='text'
@@ -232,7 +233,7 @@ const payment = () => {
                                 <div className="mt-2">
                                     <input
                                         name='ticketdesc'
-                                        value={item.ticketdesc}
+                                        defaultValue={item.ticketdesc}
                                         onChange={(e) => setFormData(e.target.value)}
                                         type='text'
                                         readOnly

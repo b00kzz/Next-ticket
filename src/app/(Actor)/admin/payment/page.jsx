@@ -10,20 +10,30 @@ import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 
 const payment = () => {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [item, setItem] = useState([])
+  const [item, setItem] = useState([]);
+  // var [count, setCount] = useState();
+  const totalSales = item.reduce((total, currentItem) => total + currentItem.ticketprice, 0);
   const [query, setQuery] = useState("");
   const api = process.env.API_ENDPOINT;
   const { userid } = useParams();
+  // const currentTime = moment().format('HH:mm:ss');
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
     if (userid === undefined) {
       loadData()
     } else {
       loadDataByid(userid)
     }
+    return () => {
+      clearInterval(timer);
+    };
 
   }, [])
 
@@ -31,6 +41,7 @@ const payment = () => {
     const response = await axios.get(api + "payments")
       .then(res => {
         setItem(res.data)
+        setCount(res.data.length)
         setIsLoaded(true)
 
       }).catch(err => {
@@ -42,6 +53,7 @@ const payment = () => {
     const response = await axios.get(api + "payments/" + userid)
       .then(res => {
         setItem(res.data)
+        setCount(res.data.length)
         setIsLoaded(true)
 
       }).catch(err => {
@@ -105,6 +117,30 @@ const payment = () => {
 
   return (
     <>
+      <div className="stats shadow flex-center">
+        <div className="stat place-items-center">
+          <div className="stat-title">จำนวนคำสั่งซื้อ</div>
+          <div className="stat-value">{item.length}</div>
+          <div className="stat-desc">เวลาอ้างอิง: {currentTime.toLocaleTimeString()}</div>
+        </div>
+
+        <div className="stat place-items-center">
+          <div className="stat-title">ยอดรวมการขาย (ราคา)</div>
+          <div className="stat-value text-secondary">{totalSales}</div>
+          <div className="stat-desc text-secondary">บาท</div>
+        </div>
+
+        <div className="stat place-items-center">
+          <div className="stat-title">เงินที่ได้</div>
+          {session?.user.roleid === "Admin" &&
+            <div className="stat-value">{totalSales * 7 / 100}</div>
+          }
+          {session?.user.roleid === "Employee" &&
+            <div className="stat-value">{(totalSales) - totalSales * 7 / 100}</div>
+          }
+          <div className="stat-desc">รายได้จาก vat 7% จากยอดขายทั้งหมด</div>
+        </div>
+      </div>
       <div className='grid grid-cols-2 gap-2 mt-6'>
         <h2 className="text-2xl lg:font-bold tracking-tight dark:text-white xs:text-md xs:font-medium">Manage Payments</h2>
         <form className="flex items-center">
@@ -180,8 +216,8 @@ const payment = () => {
 
                   <button
                     onClick={() => handleDelete(res.payid)}
-                    type="button" 
-                  className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ลบ</button>
+                    type="button"
+                    className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ลบ</button>
 
                 </td>
               </tr>

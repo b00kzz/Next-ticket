@@ -49,13 +49,14 @@ const addTicket = () => {
     }).then(async resp => {
       console.log("formData", formData);
       e.preventDefault();
+      const myInt = parseInt(formData.ticketprice, 10);
       const postData = await fetch(api + "ticket", {
         method: 'POST',
         body: JSON.stringify({
           userid: session?.user.userid,
           ticketname: formData.ticketname,
           tickettype: formData.tickettype,
-          ticketprice: formData.ticketprice,
+          ticketprice: myInt,
           ticketimage: resp.data.data.data,
           ticketdesc: formData.ticketdesc,
           ticketrepo: formData.ticketrepo,
@@ -141,7 +142,7 @@ const addTicket = () => {
                 </label>
                 <div className="mt-2">
                   <input
-                    type='text'
+                    type='number'
                     required
                     name='ticketprice'
                     onChange={(e) => handleChange(e)}

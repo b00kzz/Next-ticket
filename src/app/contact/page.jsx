@@ -51,7 +51,7 @@ const Contact = () => {
             {/* ///// */}
             <div class="items-center bg-gray-700/10 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
               <a href="#">
-                <img class="lg:ml-2 lg:rounded-lg h-46 w-96 sm:rounded-none sm:rounded-l-lg" src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-1/345036492_9312774782127149_764834869487276666_n.jpg?stp=dst-jpg_p320x320&_nc_cat=109&ccb=1-7&_nc_sid=7206a8&_nc_eui2=AeHyTRDaX2m8D7MU8U1PfJAVQfZlYQSauJ9B9mVhBJq4nzOxsl3MrR_TrmuRwxFEJbXY_4GpWpC6aMn6goheUsCL&_nc_ohc=OGJsKAKPmbIAX8ylABp&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfAiRiYy61puQlaiDNCZsbHeVIA4dFe7cAfU2PK5OEETIw&oe=648E0696" alt="Michael Avatar" />
+                <img class="lg:ml-2 lg:rounded-lg h-46 w-96 sm:rounded-none sm:rounded-l-lg" src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/345036492_9312774782127149_764834869487276666_n.jpg?_nc_cat=109&cb=99be929b-3346023f&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHyTRDaX2m8D7MU8U1PfJAVQfZlYQSauJ9B9mVhBJq4nzOxsl3MrR_TrmuRwxFEJbXY_4GpWpC6aMn6goheUsCL&_nc_ohc=RefFyyXBDf4AX_jWCy7&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfDBmuw1na_c6yVHvGI8EXms_WGWKxTTa3_3HR1OuSyHkQ&oe=64A07D94" alt="Michael Avatar" />
               </a>
               <div class="p-5">
                 <h3 class="text-xl font-bold tracking-tight dark:text-white">
