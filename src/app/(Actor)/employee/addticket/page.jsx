@@ -2,7 +2,10 @@
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
+import { render } from 'react-dom'
+import { PacmanLoader } from 'react-spinners'
 import Swal from 'sweetalert2'
+
 
 const addTicket = () => {
   const { data: session } = useSession()
@@ -36,11 +39,17 @@ const addTicket = () => {
 
   const handleSubmit = async (e) => {
     Swal.fire({
-      title: 'กำลังทำรายการ',
-      html: '<button class="btn btn-primary" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...</button>',
+      title: "กำลังอัพโหลดข้อมูล",
+      html: '<div class="flex-center overflow-y-hidden" id="loading-spinner"></div>',
       showConfirmButton: false,
       allowOutsideClick: false,
-    })
+      didOpen: () => {
+          render(
+              <PacmanLoader color="#326bc2" size={60} loading={true} />,
+              document.getElementById("loading-spinner")
+          );
+      },
+  });
     e.preventDefault();
     // console.log("target", e.target.value);
     // console.log("name", e.target.name);

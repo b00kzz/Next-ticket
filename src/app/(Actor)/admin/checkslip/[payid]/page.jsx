@@ -40,7 +40,7 @@ const checkSlip = () => {
       <div className='mb-4 grid grid-cols-2 gap-2'>
         {item.payslip !== "" &&
           <div>
-            <img className=" h-auto max-w-lg transition-all duration-300 rounded-lg cursor-pointer filter hover:grayscale"
+            <img className="flex-center h-auto max-w-lg transition-all duration-300 rounded-lg cursor-pointer filter hover:grayscale"
               src={item.payslip} />
           </div>
         }

@@ -14,11 +14,8 @@ const ticket = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const { data: session } = useSession()
   const [item, setItem] = useState([])
-  const [item1, setItem1] = useState([])
   const { userid } = useParams();
   const [query, setQuery] = useState("");
-  const [count, setCount] = useState(1);
-  const token = process.env.LINE_TOKEN;
   const api = process.env.API_ENDPOINT;
 
 
@@ -72,22 +69,25 @@ const ticket = () => {
     setQuery(prop);
   };
 
-  // const LineNotify = async (token, message) => {
-  //   try {
-  //     const res = await axios({
-  //       method: "POST",
-  //       url: "https://notify-api.line.me/api/notify",
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //         "Authorization": `Bearer ${token}`,
-  //         "Access-Control-Allow-Origin": "*",
-  //         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-  //       },
-  //       data: "message=" + message
-  //     })
-  //   } catch (error) {
-  //   }
-  // }
+  const handleClick = async (e,message) => {
+    const status = e.target.checked
+    console.log(status)
+    if (status === true) {
+      try {
+        await axios.post('/api/notify', { message: `${message} ได้ทำการเปิดขายแล้ว` });
+        console.log('Notification sent successfully');
+      } catch (error) {
+        console.error('Failed to send notification:', error);
+      }
+    }else{
+      try {
+        await axios.post('/api/notify', { message: `${message} ได้ทำการปิดการขายแล้ว` });
+        console.log('Notification sent successfully');
+      } catch (error) {
+        console.error('Failed to send notification:', error);
+      }
+    }
+  };
 
   async function handleChangesStatus(e, ticketid) {
     const status = e.target.checked;
@@ -103,10 +103,6 @@ const ticket = () => {
         }
       })
   }
-
-  
-
-
 
   async function handleChangeStatus(e, ticketid) {
     const sellstatus = e.target.checked;
@@ -244,8 +240,9 @@ const ticket = () => {
                     <input
                       type="checkbox" value={res.sellstatus}
                       className="sr-only peer" checked={res.sellstatus}
+                      onClick={(e) => handleClick(e, res.ticketname)}
                       onChange={(e) => handleChangeStatus(e, res.ticketid)}
-                      // onClick={(e) => setMessage(`${res.ticketname} ได้ทำการเปิดขายแล้วในขณะนี้สามารถทำการสั่งซื้อได้แล้ววันนี้`)}
+                    // onClick={(e) => setMessage(`${res.ticketname} ได้ทำการเปิดขายแล้วในขณะนี้สามารถทำการสั่งซื้อได้แล้ววันนี้`)}
                     />
                     <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
                   </label>

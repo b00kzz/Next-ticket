@@ -1,8 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
-import { lineNotify } from "../line/notify";
-const token = process.env.LINE_TOKEN
 
 export default NextAuth({
   providers: [
@@ -26,7 +24,6 @@ export default NextAuth({
         });
         const data = await res.json();
         if (!data.user) {
-          lineNotify(token,`USERNAME:${credentials?.username} กำลังพยายามเข้าสู้ระบบ`);
           throw new Error("Username-Or-Password-Is-Incorrect")
         }
 
@@ -35,7 +32,6 @@ export default NextAuth({
         }
 
         if (data) {
-          lineNotify(token,`${data.user.username} เข้าสู่ระบบแล้ว`);
           return data;
         }
       },

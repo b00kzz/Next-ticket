@@ -4,8 +4,9 @@ import axios from 'axios';
 import moment from 'moment';
 import 'moment/min/locales';
 import Swal from 'sweetalert2';
-import { FaTrashAlt } from 'react-icons/fa';
-import { lineNotify } from '@/pages/api/line/notify';
+import { FaTrashAlt,FaSearch } from 'react-icons/fa';
+import { FiEdit } from 'react-icons/fi';
+import Link from 'next/link';
 const token = "gnS0rBXomqz9NUEvqyqSe9kcJsnY0jtnN8Ej7awmVnh"
 
 
@@ -157,7 +158,16 @@ const manage = () => {
               <th scope="col">สถานะ</th>
               <th scope="col">วันที่สมัคร</th>
               <th scope="col">เพิ่มโดย</th>
-              <th scope="col">จัดการ</th>
+              <th scope="col">จัดการ
+                <button>
+                  <Link
+                    href={'/register'}
+                    className="ml-4 btn-sm btn-success"
+                  >
+                    + สมาชิก
+                  </Link>
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -198,7 +208,17 @@ const manage = () => {
                 </td>
                 <td>
                   <button onClick={() => handleDelete(res.userid)}>
-                    <FaTrashAlt className="text-danger"></FaTrashAlt>
+                    <FaTrashAlt className="ml-4 text-danger"></FaTrashAlt>
+                  </button>
+                  <button>
+                    <a href={'/profile/' + res.userid}>
+                      <FiEdit className="ml-2 text-yellow-400"></FiEdit>
+                    </a>
+                  </button>
+                  <button>
+                    <a href={'/detail/' + res.userid}>
+                      <FaSearch className="ml-2 text-sky-600"></FaSearch>
+                    </a>
                   </button>
                 </td>
               </tr>

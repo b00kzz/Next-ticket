@@ -62,7 +62,7 @@ const Register = () => {
   return (
     <>
       {
-        session?.user
+        session?.user.roleid !== "Admin"
           ? (
             window.location.replace('/')
 

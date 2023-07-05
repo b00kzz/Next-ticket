@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { PacmanLoader } from 'react-spinners';
+import { render } from 'react-dom';
 
 
 const payment = () => {
@@ -79,11 +81,17 @@ const payment = () => {
 
     const handleSubmit = async (e) => {
         Swal.fire({
-            title: 'กำลังทำการชำระเงิน',
-            html: '<button class="btn btn-primary" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...</button>',
+            title: "กำลังอัพโหลดข้อมูล",
+            html: '<div class="flex-center overflow-y-hidden" id="loading-spinner"></div>',
             showConfirmButton: false,
             allowOutsideClick: false,
-        })
+            didOpen: () => {
+                render(
+                    <PacmanLoader color="#326bc2" size={60} loading={true} />,
+                    document.getElementById("loading-spinner")
+                );
+            },
+        });
         e.preventDefault();
         const response = await axios.post(api + "image", imageFile, {
             headers: { 'Content-Type': 'multipart/form-data' }
@@ -144,7 +152,7 @@ const payment = () => {
                         allowOutsideClick: false,
                     }).then(async (result) => {
                         if (result.isConfirmed) {
-                            await window.location.replace("/user/history/" + session?.user.userid)
+                            window.location.replace("/user/history/" + session?.user.userid)
                         }
                     })}
                 </div>

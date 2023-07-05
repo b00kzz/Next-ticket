@@ -118,7 +118,7 @@ export default function Activity() {
                             item.sellstatus === true && item.tickettype.toLowerCase().includes(type.toLowerCase()) &&
                             <div className="group relative rounded-3xl stroke-orange-500" key={idx}>
                                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-transparent lg:aspect-none group-hover:opacity-75 lg:h-64">
-                                    <img src={item.ticketimage} alt={item.ticketname} className="h-full w-full object-contain object-center lg:h-full lg:w-full" />
+                                    <img src={item.ticketimage} alt={item.ticketname} className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                                 </div>
                                 <div className="mt-4 flex justify-between">
                                     <div>
