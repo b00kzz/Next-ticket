@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import { FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
 const ticket = () => {
@@ -69,7 +70,7 @@ const ticket = () => {
     setQuery(prop);
   };
 
-  const handleClick = async (e,message) => {
+  const handleClick = async (e, message) => {
     const status = e.target.checked
     console.log(status)
     if (status === true) {
@@ -79,7 +80,7 @@ const ticket = () => {
       } catch (error) {
         console.error('Failed to send notification:', error);
       }
-    }else{
+    } else {
       try {
         await axios.post('/api/notify', { message: `${message} ได้ทำการปิดการขายแล้ว` });
         console.log('Notification sent successfully');
@@ -153,7 +154,7 @@ const ticket = () => {
 
   return (
     <>
-      <div className='grid grid-cols-2 gap-2 mt-6'>
+      <div className='ml-4 grid grid-cols-2 gap-2 mt-6'>
         <h2 className="text-2xl lg:font-bold tracking-tight dark:text-white xs:text-md xs:font-medium">Manage Product</h2>
         <form className="flex items-center">
           <label htmlFor="simple-search" className="sr-only">ค้นหารายการ</label>
@@ -170,7 +171,7 @@ const ticket = () => {
       </div>
       <div className='mt-2 relative overflow-x-auto'>
         <Link
-          href={session?.user.roleid === 'Admin' ? 'addticket' : '/' && session?.user.roleid === 'Employee' ? 'addticket' : '/'}
+          href={session?.user.roleid === 'Admin' ? '/admin/addticket' : '/' && session?.user.roleid === 'Employee' ? '/employee/addticket' : '/'}
           className="col-4 btn btn-success w-26 h-7 col-12 rounded-full"
         >
           เพิ่มรายการ
@@ -248,18 +249,9 @@ const ticket = () => {
                   </label>
                 </td>
                 <td>
-                  <button
-                    onClick={() => handleDelete(res.ticketid)}
-                    type="button"
-                    className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ลบ</button>
-
-
-                  {/* <Link
-                    className="col-6"
-                    href={"Employee/editticket/" + res.ticketid}
-                    >
-                    <i className="bi bi-pencil-square text-warning"></i>
-                  </Link> */}
+                  <button onClick={() => handleDelete(res.ticketid)}>
+                    <FaTrashAlt className="ml-4 text-danger"></FaTrashAlt>
+                  </button>
                 </td>
               </tr>
             ))}

@@ -14,7 +14,7 @@ const profile = () => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [item, setItem] = useState({});
-    const [formData, setFormData] = useState({});
+    // const [formData, setFormData] = useState({});
     const [imageFile, setImageFile] = useState([]);
     const [imageUrl, setImageUrl] = useState([]);
 

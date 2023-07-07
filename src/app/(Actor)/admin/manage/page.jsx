@@ -1,13 +1,13 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/min/locales';
 import Swal from 'sweetalert2';
-import { FaTrashAlt,FaSearch } from 'react-icons/fa';
+import { FaTrashAlt, FaSearch } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
 import Link from 'next/link';
-const token = "gnS0rBXomqz9NUEvqyqSe9kcJsnY0jtnN8Ej7awmVnh"
+import UserModal from '@/components/UserModal';
 
 
 
@@ -20,9 +20,11 @@ const manage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [item, setItem] = useState([])
   const [query, setQuery] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const employeeCount = item.filter(user => user.roleid === "Employee").length;
   const banned = item.filter(user => user.status === false).length;
+  const [userid, setUserid] = useState({});
   const api = process.env.API_ENDPOINT;
 
   useEffect(() => {
@@ -56,7 +58,6 @@ const manage = () => {
     console.log({ roleid }, userid);
     axios.put(api + "user/role/" + userid, { roleid })
       .then(res => {
-        lineNotify(token, "test1")
         // console.log(res);
         loadData();
       })
@@ -112,6 +113,7 @@ const manage = () => {
 
 
   return (
+    <Fragment>
     <section>
       <div className="stats shadow flex-center">
         <div className="stat place-items-center">
@@ -162,71 +164,84 @@ const manage = () => {
                 <button>
                   <Link
                     href={'/register'}
-                    className="ml-4 btn-sm btn-success"
+                    className="ml-4 btn-sm btn-success rounded-sm"
                   >
-                    + สมาชิก
+                    + เพิ่มสมาชิก
                   </Link>
                 </button>
               </th>
             </tr>
           </thead>
           <tbody>
-            {item.map((res, index) => (
-              res.username.toLowerCase().includes(query.toLowerCase()) &&
-              <tr key={index} className='dark:text-white whitespace-nowrap bg-slate-300/30 hover:bg-violet-100'>
-                <th scope="row">{index + 1}</th>
-                <td>{res.username}</td>
-                <td>{res.nickname}</td>
-                <td>
-                  <select className="form-select text-warning bg-gray-800 rounded-md"
-                    value={res.roleid}
-                    key={index}
-                    onChange={(e) => handleChangesRole(e, res.userid)}
-                  >
-                    {roles.map((role, index) =>
+            {item.map((res, index) => {
+              return (
+                res.username.toLowerCase().includes(query.toLowerCase()) &&
+                <tr key={index} className='dark:text-white whitespace-nowrap bg-slate-300/30 hover:bg-violet-100'>
+                  <th scope="row">{index + 1}</th>
+                  <td>{res.username}</td>
+                  <td>{res.nickname}</td>
+                  <td>
+                    <select className="form-select text-warning bg-gray-800 rounded-md"
+                      value={res.roleid}
+                      key={index}
+                      onChange={(e) => handleChangesRole(e, res.userid)}
+                    >
+                      {roles.map((role, index) =>
 
-                      <option key={index} value={role.value}>{role.label}</option>
-                    )}
-                  </select>
-                </td>
-                <td>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox" value={res.status}
-                      className="sr-only peer" checked={res.status}
-                      onChange={(e) => handleChangesStatus(e, res.userid)}
+                        <option key={index} value={role.value}>{role.label}</option>
+                      )}
+                    </select>
+                  </td>
+                  <td>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox" value={res.status}
+                        className="sr-only peer" checked={res.status}
+                        onChange={(e) => handleChangesStatus(e, res.userid)}
 
-                    />
-                    <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
-                  </label>
-                </td>
-                <td>
-                  {moment(res.createddate).locale('th').format('lll' + ' น.')}
-                </td>
-                <td>
-                  {res.createdby}
-                </td>
-                <td>
-                  <button onClick={() => handleDelete(res.userid)}>
-                    <FaTrashAlt className="ml-4 text-danger"></FaTrashAlt>
-                  </button>
-                  <button>
-                    <a href={'/profile/' + res.userid}>
-                      <FiEdit className="ml-2 text-yellow-400"></FiEdit>
-                    </a>
-                  </button>
-                  <button>
-                    <a href={'/detail/' + res.userid}>
+                      />
+                      <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                    </label>
+                  </td>
+                  <td>
+                    {moment(res.createddate).locale('th').format('lll' + ' น.')}
+                  </td>
+                  <td>
+                    {res.createdby}
+                  </td>
+                  <td>
+                    <button onClick={() => handleDelete(res.userid)}>
+                      <FaTrashAlt className="ml-4 text-danger"></FaTrashAlt>
+                    </button>
+                    <button>
+                      <a href={'/profile/' + res.userid}>
+                        <FiEdit className="ml-2 text-yellow-400"></FiEdit>
+                      </a>
+                    </button>
+                    {/* <a href={'/detail/' + res.userid}>
+                  </a> */}
+                    <button
+                      onClick={() => {setUserid(res),setShowModal(true)}}
+                      
+                    >
                       <FaSearch className="ml-2 text-sky-600"></FaSearch>
-                    </a>
-                  </button>
-                </td>
-              </tr>
-            ))}
+                    </button>
+                    {/* {modalIsOpen && (
+                      ReactDOM.createPortal(
+                        <ModalUser key={index} userid={userid} isOpen={modalIsOpen} closeModal={closeModal} />,
+                        document.body // แสดง Modal ในส่วนต่อขยายของ DOM
+                      )
+                    )} */}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
     </section>
+    <UserModal isOpen={showModal} onClose={() => setShowModal(false)} user={userid}/>
+    </Fragment>
   )
 }
 

@@ -70,7 +70,7 @@ const Register = () => {
           : (
             <>
               {/* <Navbar /> */}
-              <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+              <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-[100%] h-[30%]">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                   {/* <img
                     className="mx-auto h-10 w-auto"
@@ -78,19 +78,20 @@ const Register = () => {
                     alt="Your Company"
                   /> */}
                   <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight dark:text-white">
-                    Sign up for an account
+                    แบบฟอร์มลงทะเบียนสมาชิก
                   </h2>
                 </div>
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
                   <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
                     <div>
                       <label htmlFor="username" className="block text-sm font-medium leading-6 dark:text-white">
-                        Username
+                        ชื่อผู้ใช้
                       </label>
-                      <div className="mt-2">
+                      <div className="mt-1">
                         <input
                           type='text'
+                          placeholder='กรอกชื่อผู้ใช้'
                           onChange={(e) => setUsername(e.target.value)}
                           className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -98,11 +99,12 @@ const Register = () => {
                     </div>
                     <div>
                       <label htmlFor="password" className="block text-sm font-medium leading-6 dark:text-white">
-                        Password
+                        รหัสผ่าน
                       </label>
-                      <div className="mt-2">
+                      <div className="mt-1">
                         <input
                           type='password'
+                          placeholder='กรอกรหัสผ่าน'
                           onChange={(e) => setPassword(e.target.value)}
                           className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -110,11 +112,12 @@ const Register = () => {
                     </div>
                     <div>
                       <label htmlFor="nickname" className="block text-sm font-medium leading-6 dark:text-white">
-                        Nickname
+                        ชื่อเล่น
                       </label>
-                      <div className="mt-2">
+                      <div className="mt-1">
                         <input
                           type='text'
+                          placeholder='กรอกรชื่อเล่น'
                           onChange={(e) => setNickname(e.target.value)}
                           className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -124,11 +127,12 @@ const Register = () => {
                     <div>
                       <div className="flex items-center justify-between">
                         <label htmlFor="password" className="block text-sm font-medium leading-6 dark:text-white">
-                          Email
+                          อีเมล
                         </label>
                       </div>
-                      <div className="mt-2">
+                      <div className="mt-1">
                         <input
+                        placeholder='กรอกรอีเมล'
                           id="email"
                           type='email'
                           required
@@ -142,7 +146,7 @@ const Register = () => {
                         type="submit"
                         className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       >
-                        Sign up
+                        สมัครสมาชิก
                       </button>
                     </div>
                   </form>
