@@ -1,11 +1,12 @@
 "use client"
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
 import 'moment/min/locales';
 import axios from 'axios';
 import { BsBoomboxFill } from "react-icons/bs";
+import ProductDetailModal from '@/components/ProductDetailModal';
 
 export default function Activity() {
     const [error, setError] = useState(null);
@@ -13,6 +14,7 @@ export default function Activity() {
     const [items, setItems] = useState([]);
     const [query, setQuery] = useState("");
     const [type, setType] = useState("");
+    const [showModal, setShowModal] = useState(false);
     const api = process.env.API_ENDPOINT;
 
     useEffect(() => {
@@ -62,6 +64,7 @@ export default function Activity() {
     // } else {
     return (
         <>
+        <Fragment>
             <div>
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
@@ -152,6 +155,8 @@ export default function Activity() {
                     </div>
                 </div>
             </div>
+            <ProductDetailModal isOpen={showModal} onClose={() => setShowModal(false)}/>
+            </Fragment>
         </>
     );
     // }

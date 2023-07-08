@@ -205,6 +205,7 @@ const addTicket = () => {
                     name='file'
                     accept='image/*'
                     onInput={(e) => handleChange(e)}
+                    required
                     multiple
                     className="block w-full rounded-md border-0 py-0.5 dark:text-white shadow-sm ring-1 ring-inset ring-white-300 placeholder:dark:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" aria-describedby="file_input_help" id="file_input" type="file" />
 
@@ -242,16 +243,6 @@ const addTicket = () => {
               : (
                 <>
                   <div className='container'>
-                    {/* <img
-                      className="mx-auto h-auto w-auto"
-                      src="https://www.finnomena.com/wp-content/uploads/2016/10/promt-pay-logo.jpg"
-                      alt="PromptPay"
-                    />
-                    <img
-                      className="mx-auto h-auto w-auto"
-                      src={item.ticketqr}
-                      alt="PromptPay"
-                    /> */}
                     <h1 className="mt-10 text-center text-2xl font-bold dark:text-white leading-9 tracking-tight text-gray-900">
                       ตัวอย่างรูป
                     </h1>

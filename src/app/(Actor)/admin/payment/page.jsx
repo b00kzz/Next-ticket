@@ -4,11 +4,11 @@ import axios from 'axios';
 import moment from 'moment';
 import 'moment/min/locales';
 import { useSession } from 'next-auth/react';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { Fragment, useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import PaymentModal from '@/components/PaymentModal';
+import { fCurrencyTH } from '@/functions/formatNumber';
 
 const payment = () => {
   const { data: session } = useSession();
@@ -111,9 +111,8 @@ const payment = () => {
   };
 
   const status = [{ value: "กำลังดำเนินการ", color: "bg-info text-white" },
-  { value: "กำลังตรวจสอบ", color: "bg-primary text-white" },
   { value: "ทำรายการสำเร็จ", color: "bg-success  text-white" },
-  { value: "เกิดข้อผิดพลาด", color: "bg-danger text-white" },
+  { value: "สลิปไม่ถูกต้อง", color: "bg-danger text-white" },
   ]
 
   return (
@@ -125,20 +124,18 @@ const payment = () => {
             <div className="stat-value">{item.length}</div>
             <div className="stat-desc">เวลาอ้างอิง: {currentTime.toLocaleTimeString()}</div>
           </div>
-
           <div className="stat place-items-center">
             <div className="stat-title">ยอดรวมการขาย (ราคา)</div>
-            <div className="stat-value text-secondary">{totalSales}</div>
+            <div className="stat-value text-secondary">{fCurrencyTH(totalSales)}฿</div>
             <div className="stat-desc text-secondary">บาท</div>
           </div>
-
           <div className="stat place-items-center">
             <div className="stat-title">เงินที่ได้</div>
             {session?.user.roleid === "Admin" &&
-              <div className="stat-value">{totalSales * 7 / 100}</div>
+              <div className="stat-value">{fCurrencyTH(totalSales * 7 / 100)}฿</div>
             }
             {session?.user.roleid === "Employee" &&
-              <div className="stat-value">{(totalSales) - totalSales * 7 / 100}</div>
+              <div className="stat-value">{fCurrencyTH((totalSales) - totalSales * 7 / 100)}฿</div>
             }
             <div className="stat-desc">รายได้จาก vat 7% จากยอดขายทั้งหมด</div>
           </div>
@@ -190,18 +187,18 @@ const payment = () => {
                     {moment(res.createddate).locale('th').format('lll' + ' น.')}
                   </td>
                   <td>
-                    {/* <select className="form-select text-warning bg-slate-800"
-                    onChange={(e) => handleChangesST(e, res.payid)}
-                    value={res.paymentstatus}
-                    key={index}
-                    readOnly
-                  >
-                    {status.map((st, index) => (
-                    
-                      <option readOnly disabled key={index} value={st.value}>{st.value}</option>
-                    ))}
-                  </select> */}
-                    <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{res.paymentstatus}</span>
+                    <select className="form-select text-warning bg-slate-800 rounded-3xl"
+                      onChange={(e) => handleChangesST(e, res.payid)}
+                      value={res.paymentstatus}
+                      key={index}
+                      readOnly
+                    >
+                      {status.map((st, index) => (
+
+                        <option readOnly key={index} value={st.value}>{st.value}</option>
+                      ))}
+                    </select>
+                    {/* <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{res.paymentstatus}</span> */}
 
                   </td>
                   <td>
@@ -218,8 +215,8 @@ const payment = () => {
                         <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ตรวจสอบ</button></Link>)
                     } */}
                     <button
-                      onClick={() => {setDetail(res),setShowModal(true)}}
-                      
+                      onClick={() => { setDetail(res), setShowModal(true) }}
+
                     >
                       <FaSearch className="ml-2 text-sky-600"></FaSearch>
                     </button>

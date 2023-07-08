@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { css } from "@emotion/react";
 import { PacmanLoader } from "react-spinners";
 import { render } from "react-dom";
 
@@ -25,7 +24,6 @@ const profile = () => {
 
     useEffect(() => {
         loadData(userid);
-        console.clear();
     }, []);
 
     const loadData = async (userid) => {
@@ -114,12 +112,11 @@ const profile = () => {
     // window.console.clear()
     return (
         <>
-            {console.clear()}
             <div className="grid grid-cols-2 gap-2">
-                <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-                    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+                    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                         <form
-                            class="space-y-6"
+                            className="space-y-6"
                             action="#"
                             method="POST"
                             onSubmit={handleSubmit}
@@ -197,6 +194,7 @@ const profile = () => {
                                         accept="image/*"
                                         onInput={(e) => handleChange(e)}
                                         multiple
+                                        required
                                         className="block w-full rounded-md border-0 py-0.5 dark:dark:text-white shadow-sm ring-1 ring-inset ring-white-300 placeholder:dark:dark:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         aria-describedby="file_input_help"
                                         id="file_input"
@@ -207,7 +205,7 @@ const profile = () => {
                             <div>
                                 <button
                                     type="submit"
-                                    class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 dark:text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 dark:text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     อัพเดตข้อมูล
                                 </button>

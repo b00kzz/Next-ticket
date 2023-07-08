@@ -60,10 +60,9 @@ const reviewPage = () => {
   const handleSubmit = async (e) => {
     Swal.fire({
       title: 'กำลังทำรายการ',
-      html: '<button class="btn btn-primary" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...</button>',
+      html: '<button class="btn btn-info" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...</button>',
       showConfirmButton: false,
       allowOutsideClick: false,
-
     })
     e.preventDefault();
     const response = await axios.post(api + "image", imageFile, {
@@ -155,6 +154,7 @@ const reviewPage = () => {
                       accept='image/*'
                       onInput={(e) => handleChange(e)}
                       multiple
+                      required
                       className="block w-full rounded-md border-0 py-0.5 dark:text-white shadow-sm ring-1 ring-inset ring-white-300 placeholder:dark:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" aria-describedby="file_input_help" id="file_input" type="file" />
                       </div>
                 </div>
@@ -197,7 +197,7 @@ const reviewPage = () => {
                     <img
                       class="mx-auto h-auto w-auto"
                       src={item.ticketimage}
-                      alt="PromptPay"
+                      alt="ticketimage"
                     />
                   </div>
                 </>

@@ -181,7 +181,7 @@ const manage = () => {
                   <td>{res.username}</td>
                   <td>{res.nickname}</td>
                   <td>
-                    <select className="form-select text-warning bg-gray-800 rounded-md"
+                    <select className="form-select text-warning bg-gray-800 rounded-xl"
                       value={res.roleid}
                       key={index}
                       onChange={(e) => handleChangesRole(e, res.userid)}

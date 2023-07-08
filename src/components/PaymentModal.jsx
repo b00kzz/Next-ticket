@@ -55,8 +55,8 @@ const PaymentModal = ({ isOpen, onClose, detail }) => {
                             <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">ชื่อรายการ:  {detail.ticketname}</span>
                             <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">ราคา: {detail.ticketprice}</span>
                             <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">รหัสการซื้อ: {detail.payid}</span>
-                            <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">รหัสผู้ขาย: {detail.userid}</span>
-                            <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">รหัสผู้ซื้อ: {detail.byid}</span>
+                            <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">รหัสผู้ขาย: {detail.byid}</span>
+                            <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">รหัสผู้ซื้อ: {detail.userid}</span>
                             <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">รายละเอียดตั๋ว: {detail.ticketdesc}</span>
                             <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">สถานะการชำระ: {detail.paymentstatus}</span>
                             <span className="text-gray-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">วันที่ซื้อ: {moment(detail.createddate).locale('th').format('lll')}</span>
@@ -65,7 +65,7 @@ const PaymentModal = ({ isOpen, onClose, detail }) => {
                     <hr />
                     <div className="flex-center mt-2">
                         {detail.paymentstatus === "ทำรายการสำเร็จ" ?
-                            <button className='black_btn mr-4' onClick={() => onClose()}>ปิด</button>
+                            <button className='black_btn mr-4' onClick={() => onClose()}>ปิดหน้าต่าง</button>
                             :
                             <button type='submit' className='black_btn mr-4' onClick={() => handleSubmit(detail.payid)}>ยืนยันการตรวจสอบ</button>
 
