@@ -70,19 +70,6 @@ export default function Navbar() {
                     </Disclosure.Button>
                   </div>
                   <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start sm:items-stretch sm:justify-start">
-                    {/* <div className="flex flex-shrink-0 items-center">
-                    <img
-                      className="block h-10 w-auto lg:hidden rounded-full"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt="Your Company"
-                    />
-                    <img
-                      className="hidden h-10 w-auto lg:block rounded-full"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt="Your Company"
-                    />
-
-                  </div> */}
                     <div className="hidden sm:ml-6 sm:block">
                       <div className="flex space-x-4">
                         {navigation.map((item) => (
@@ -128,20 +115,28 @@ export default function Navbar() {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-
                             <Menu.Item>
                               {({ active }) => (
-
                                 <Link
                                   href={session?.user.roleid === 'Admin' ? '/admin/manage' : '/' && session?.user.roleid === 'Employee' ? '/employee/manage/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/history/' + session.user.userid : ''}
                                   className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-
                                 >
                                   {session?.user.roleid === 'Admin' ? 'หน้าแอดมิน' : session?.user.roleid === 'Employee' ? 'จัดการบัตร' : session?.user.roleid === 'User' ? 'ประวัติการทำรายการ' : ''}
                                 </Link>
                               )}
                             </Menu.Item>
-
+                            {session?.user.roleid === 'Employee' || session?.user.roleid === 'User' &&
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    href={session?.user.roleid === 'Employee' ? '/employee/manage/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/history/' + session.user.userid : ''}
+                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  >
+                                    {session?.user.roleid === 'Employee' ? 'แก้ไขข้อมูลผู้ขาย' : session?.user.roleid === 'User' ? 'ลงทะเบียนเป็นผู้ขาย' : ''}
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            }
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
@@ -197,7 +192,7 @@ export default function Navbar() {
                             onClick={() => signIn({ callbackUrl: '/', redirect: true })}
                           >
                             <PersonIcon />
-                            Sign in
+                            เข้าสู่ระบบ
                           </Link>
                         </div>
                       )

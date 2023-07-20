@@ -42,12 +42,13 @@ const history = () => {
 
   async function handleDelete(payid) {
     Swal.fire({
-      title: 'ต้องการลบรายการหรือไม่',
+      title: 'คุณต้องการลบรายการหรือไม่',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes Delete!',
+      confirmButtonText: 'ยืนยัน',
+      cancelButtonText: 'ยกเลิก'
     }).then(async (result) => {
       if (result.isConfirmed) {
         axios.delete(api + "payment/" + payid)
@@ -55,8 +56,8 @@ const history = () => {
             loadDataId(userid);
           })
         Swal.fire(
-          'Deleted!',
-          'You clicked the button!',
+          'ลบสำเร็จ!',
+          'ระบบได้ทำการลบเรียบร้อยแล้ว!',
           'success'
         )
       }

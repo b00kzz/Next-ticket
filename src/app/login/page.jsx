@@ -40,7 +40,7 @@ export default function Login() {
               Welcome
             </div>
             <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
-              กรุณากรอก Username และ Password เพื่อเข้าสู่ระบบ
+              กรุณากรอกชื่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ
             </div>
             <div className="mt-10">
               <form method="POST" action="#" onSubmit={handleSubmit}>
@@ -48,7 +48,7 @@ export default function Login() {
                   <label
                     className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
                   >
-                    Username:
+                    ชื่อผู้ใช้:
                   </label>
                   <div className="relative">
                     <div
@@ -71,7 +71,7 @@ export default function Login() {
                   <label
                     className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
                   >
-                    Password:
+                    รหัสผ่าน:
                   </label>
                   <div className="relative">
                     <div

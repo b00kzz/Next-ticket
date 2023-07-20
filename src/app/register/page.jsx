@@ -25,11 +25,12 @@ const Register = () => {
     } else if (username.length > 3 || password.length > 3 || email.length > 3 || nickname.length > 3) {
       Swal.fire({
         title: 'ต้องการยืนยันการลงทะเบียน?',
-        icon: 'warning',
+        icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, we it!',
+        cancelButtonText:'ยกเลิก',
+        confirmButtonText: 'ยืนยัน',
       }).then(async (result) => {
         if (result.isConfirmed) {
           const res = await fetch("http://localhost:8088/v1/register", {
@@ -45,8 +46,8 @@ const Register = () => {
             }),
           });
           Swal.fire(
-            'Registered!',
-            'You clicked the button!',
+            'สำเร็จ!',
+            'สมัครสมาชิกเรียบร้อยแล้ว',
             'success'
           ).then(() => {
             window.location.replace('/')

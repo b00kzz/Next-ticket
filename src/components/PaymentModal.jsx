@@ -1,12 +1,34 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import moment from 'moment';
 import 'moment/min/locales';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { PacmanLoader } from 'react-spinners';
+import { render } from 'react-dom';
 
-const PaymentModal = ({ isOpen, onClose, detail }) => {
+const PaymentModal = ({ isOpen, onClose, detail, userid }) => {
     if (!isOpen) return null;
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [item, setItem] = useState({});
     const api = process.env.API_ENDPOINT;
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const loadData = async () => {
+        const response = await axios
+            .get(api + `user/${userid}`)
+            .then((res) => {
+                setItem(res.data);
+                setIsLoaded(true);
+            })
+            .catch((err) => {
+                setError(err);
+                // console.log(err);
+            });
+    };
     const handleSubmit = async (payid) => {
         Swal.fire({
             title: 'คุณได้ตรวจสอบแล้วใช่หรือไม่',
@@ -16,21 +38,40 @@ const PaymentModal = ({ isOpen, onClose, detail }) => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'ยืนยัน',
             cancelButtonText: 'ยกเลิก'
-          }).then(async (result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 const paymentstatus = "ทำรายการสำเร็จ"
-                axios.put(api + "payment/" + payid, { paymentstatus })
-                    .then(res => {
-                        window.location.reload();
-                        onClose();
+                Swal.fire({
+                    title: "กำลังทำรายการ",
+                    html: '<div class="flex-center overflow-y-hidden" id="loading-spinner"></div>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        render(
+                            <PacmanLoader color="#326bc2" size={60} loading={true} />,
+                            document.getElementById("loading-spinner")
+                        );
+                    },
+                });
+                const changeST = await axios.put(api + "payment/" + payid, { paymentstatus })
+                    .then(async res => {
+                        const sendMail = await axios.post(api + "sender", {
+                            subject: detail.ticketname,
+                            body: `${detail.ticketname} ลิ้งรับชม:${detail.ticketrepo}`,
+                            to: item.email,
+                            image: "https://res.cloudinary.com/dxbbaikj5/image/upload/v1689578414/Morlam/rhhs0v0accks9dkoqwjc.jpg",
+                        }).then(res => {
+                            window.location.reload();
+                            onClose();
+                        })
                     })
-              Swal.fire(
-                'สำเร็จ!',
-                'เปลี่ยนสถานะเรียบร้อยแล้ว!',
-                'success'
-              )
+                Swal.fire(
+                    'สำเร็จ!',
+                    'เปลี่ยนสถานะเรียบร้อยแล้ว!',
+                    'success'
+                )
             }
-          })
+        })
     }
     return (
         <div className='fixed top-0 left-0 w-screen h-screen bg-black/50 bg-opacity-25 flex justify-center items-center backdrop-blur-sm'>

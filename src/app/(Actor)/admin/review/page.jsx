@@ -157,10 +157,10 @@ const reviewRead = () => {
           <table className=" mt-2 table col-3 table-hover">
             <thead>
               <tr className='bg-gray-800 text-white dark:text-white '>
-                <th scope="col">No
+                <th scope="col">ลำดับ
                 </th>
-                <th scope="col">TicketID</th>
-                <th scope="col">UserID</th>
+                <th scope="col">รหัสตั๋ว</th>
+                <th scope="col">รหัสผู้ใช้</th>
                 <th scope="col">รายละเอียด</th>
                 <th scope="col">วันที่</th>
                 <th scope="col">รีวิวโดย</th>

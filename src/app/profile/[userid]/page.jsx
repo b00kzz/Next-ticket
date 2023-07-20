@@ -74,39 +74,66 @@ const profile = () => {
             },
         });
         e.preventDefault();
-        const response = await axios
-            .post(api + "image", imageFile, {
-                headers: { "Content-Type": "multipart/form-data" },
-            })
-            .then(async (resp) => {
-                e.preventDefault();
-                const postData = await fetch(api + "user/" + userid, {
-                    method: "PUT",
-                    body: JSON.stringify({
-                        // password: item.password,
-                        nickname: item.nickname,
-                        email: item.email,
-                        avatar: resp.data.data.data,
-                    }),
-                    headers: { "content-type": "application/json" },
+        if (imageUrl.length < 2) {
+            const postData = await fetch(api + "user/" + userid, {
+                method: "PUT",
+                body: JSON.stringify({
+                    // password: item.password,
+                    nickname: item.nickname,
+                    email: item.email,
+                }),
+                headers: { "content-type": "application/json" },
+            }).then((res) => res.json())
+                .then((res) => {
+                    if (res !== null) {
+                        Swal.fire({
+                            title: "อัพเดตข้อมูลสำเร็จ",
+                            text: "กลับไปยังหน้าหลัก",
+                            icon: "success",
+                            confirmButtonColor: "#3085d6",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                loadData();
+                                window.location.replace("/");
+                            }
+                        });
+                    }
+                });
+        } else {
+            const response = await axios
+                .post(api + "image", imageFile, {
+                    headers: { "Content-Type": "multipart/form-data" },
                 })
-                    .then((res) => res.json())
-                    .then((res) => {
-                        if (res !== null) {
-                            Swal.fire({
-                                title: "อัพเดตข้อมูลสำเร็จ",
-                                text: "กลับไปยังหน้าหลัก",
-                                icon: "success",
-                                confirmButtonColor: "#3085d6",
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    loadData();
-                                    window.location.replace("/");
-                                }
-                            });
-                        }
-                    });
-            });
+                .then(async (resp) => {
+                    e.preventDefault();
+                    const postData = await fetch(api + "user/" + userid, {
+                        method: "PUT",
+                        body: JSON.stringify({
+                            // password: item.password,
+                            nickname: item.nickname,
+                            email: item.email,
+                            avatar: resp.data.data.data,
+                        }),
+                        headers: { "content-type": "application/json" },
+                    })
+                        .then((res) => res.json())
+                        .then((res) => {
+                            if (res !== null) {
+                                Swal.fire({
+                                    title: "อัพเดตข้อมูลสำเร็จ",
+                                    text: "กลับไปยังหน้าหลัก",
+                                    icon: "success",
+                                    confirmButtonColor: "#3085d6",
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        loadData();
+                                        window.location.replace("/");
+                                    }
+                                });
+                            }
+                        });
+                });
+        }
     };
     // console.clear()
     // window.console.clear()
@@ -194,7 +221,7 @@ const profile = () => {
                                         accept="image/*"
                                         onInput={(e) => handleChange(e)}
                                         multiple
-                                        required
+                                        // required
                                         className="block w-full rounded-md border-0 py-0.5 dark:dark:text-white shadow-sm ring-1 ring-inset ring-white-300 placeholder:dark:dark:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         aria-describedby="file_input_help"
                                         id="file_input"
