@@ -20,13 +20,13 @@ const manage = () => {
   // const totalSales = item.reduce((total, currentItem) => total + currentItem.ticketprice, 0);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [item, setItem] = useState([])
+  const [item, setItem] = useState([]);
   const [query, setQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const employeeCount = item.filter(user => user.roleid === "Employee").length;
   const banned = item.filter(user => user.status === false).length;
-  const [userid, setUserid] = useState({});
+  const [user, setUser] = useState({});
   const api = process.env.API_ENDPOINT;
 
   useEffect(() => {
@@ -192,12 +192,10 @@ const manage = () => {
                 const isMatch = res.username.toLowerCase().includes(query.toLowerCase()) ||
                   res.nickname.toLowerCase().includes(query.toLowerCase()) ||
                   res.roleid.toLowerCase().includes(query.toLowerCase())
-
                 // กรองเฉพาะรายการที่ตรงกับการค้นหา
                 if (!isMatch) {
                   return null;
                 }
-
                 return (
                   <tr key={index} className='dark:text-white whitespace-nowrap bg-slate-300/30 hover:bg-violet-100'>
                     <th scope="row">{index + 1}</th>
@@ -242,7 +240,7 @@ const manage = () => {
                       {/* <a href={'/detail/' + res.userid}>
                   </a> */}
                       <button
-                        onClick={() => { setUserid(res), setShowModal(true) }}
+                        onClick={() => { setUser(res), setShowModal(true)}}
 
                       >
                         <FaSearch className="ml-4 text-sky-600"></FaSearch>
@@ -258,7 +256,7 @@ const manage = () => {
           </table>
         </div>
       </section>
-      <UserModal isOpen={showModal} onClose={() => setShowModal(false)} user={userid} />
+      <UserModal isOpen={showModal} onClose={() => setShowModal(false)} user={user} userid={user.userid} />
     </Fragment>
   )
 }

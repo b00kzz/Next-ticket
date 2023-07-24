@@ -150,10 +150,8 @@ const payment = () => {
                         confirmButtonText: 'ตกลง',
                         icon: 'success',
                         allowOutsideClick: false,
-                    }).then(async (result) => {
-                        if (result.isConfirmed) {
-                            window.location.replace("/user/history/" + session?.user.userid)
-                        }
+                    }).then(() => {
+                        window.location.replace("/user/history/" + session?.user.userid)
                     })}
                 </div>
             ))}

@@ -125,18 +125,6 @@ export default function Navbar() {
                                 </Link>
                               )}
                             </Menu.Item>
-                            {session?.user.roleid === 'Employee' || session?.user.roleid === 'User' &&
-                              <Menu.Item>
-                                {({ active }) => (
-                                  <Link
-                                    href={session?.user.roleid === 'Employee' ? '/employee/manage/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/history/' + session.user.userid : ''}
-                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                  >
-                                    {session?.user.roleid === 'Employee' ? 'แก้ไขข้อมูลผู้ขาย' : session?.user.roleid === 'User' ? 'ลงทะเบียนเป็นผู้ขาย' : ''}
-                                  </Link>
-                                )}
-                              </Menu.Item>
-                            }
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
@@ -148,6 +136,30 @@ export default function Navbar() {
                                 </Link>
                               )}
                             </Menu.Item>
+                            {session?.user.roleid === 'User' &&
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    href={session?.user.roleid === 'Employee' ? '/employee/manage/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/sellerregistration/' + session.user.userid : ''}
+                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  >
+                                    {session?.user.roleid === 'Employee' ? 'แก้ไขข้อมูลผู้ขาย' : session?.user.roleid === 'User' ? 'ลงทะเบียนเป็นผู้ขาย' : ''}
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            }
+                            {session?.user.roleid === 'Employee' &&
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    href={session?.user.roleid === 'Employee' ? '/employee/detail/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/sellerregistration/' + session.user.userid : ''}
+                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  >
+                                    {session?.user.roleid === 'Employee' ? 'แก้ไขข้อมูลผู้ขาย' : session?.user.roleid === 'User' ? 'ลงทะเบียนเป็นผู้ขาย' : ''}
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            }
 
                             <Menu.Item>
                               {({ active }) => (

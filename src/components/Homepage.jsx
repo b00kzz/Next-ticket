@@ -6,7 +6,7 @@ import axios from 'axios';
 import LineNotifyModal from './LineNotifyModal';
 
 
-const HomePage = ({}) => {
+const HomePage = ({ }) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -79,7 +79,7 @@ const HomePage = ({}) => {
                                     <div className="p-1.5 absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                         <svg aria-hidden="true" className="w-5 h-5 xs:w-4 xs:h-4 text-gray-500 dark:text-gray-400" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                                     </div>
-                                    <input type="text" id="simple-search" onChange={handleSearch} value={query} className="lg:h-10 xs:plassholder-xs xs:h-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ค้นหาชื่อรายการ" required />
+                                    <input type="text" id="simple-search" onChange={handleSearch} value={query} className="lg:h-10 xs:plassholder-xs xs:h-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ค้นหาชื่อรายการ" />
                                 </div>
                                 <button type="submit" onClick={() => { setQuery(""), loadData() }} className="lg:p-2.5 xs:p-0.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 
@@ -101,13 +101,13 @@ const HomePage = ({}) => {
                                             <div className="relative mt-2 h-80 md:h-96 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-96">
                                                 <img src={item.ticketimage} alt={item.ticketname} className="h-full w-full object-cover object-center" />
                                             </div>
-                                            <div className='grid grid-cols-2 gap-2 mt-6'>
-                                                <div className="p-1 items-center leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                                                    <span className="flex rounded-full bg-red-700 uppercase text-indigo-100 px-2 py-1 text-xs font-bold mr-1">New</span>
-                                                    <span className="font-semibold mr-2 text-left text-emerald-500 flex-auto">{item.ticketname}</span>
+                                            <div className='flex'>
+                                                <div className="p-1 leading-none lg:rounded-full lg:inline-flex flex-between">
+                                                    <span className="flex-center items-start rounded-full bg-red-700 uppercase text-indigo-100 px-2 py-1 text-xs font-bold mr-1">ใหม่</span>
+                                                    <span className="flex-center font-semibold mr-2 text-left text-emerald-500 text-sm">{item.ticketname}</span>
                                                 </div>
-                                                <h3 className="text-sm text-gray-500 text-end">
-                                                    <a href="/product" className='dark:text-white'>
+                                                <h3 className="text-sm font-bold text-gray-500 flex-end">
+                                                    <a href="/product" className='dark:text-white text-end'>
                                                         <span className="absolute inset-0"></span>
                                                         {item.ticketprice} บาท (THB)
                                                     </a>

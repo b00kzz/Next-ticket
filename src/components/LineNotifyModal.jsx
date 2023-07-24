@@ -4,7 +4,7 @@ const LineNotifyModal = ({ isOpen, onClose, user }) => {
     if (!isOpen) return null;
     return (
         <div className='modal-portal fixed top-0 left-0 w-screen h-screen bg-black/50 bg-opacity-25 flex justify-center items-center backdrop-blur-sm'>
-            <div className="relative w-[30%] h-[50%]  rounded-lg flex flex-col">
+            <div className="relative w-[30%] h-[60%]  rounded-lg flex flex-col">
                 <div className="bg-white p-2 rounded-lg">
                     <h1 className='text-center text-2xl'>รับการแจ้งเตือนผ่าน Line Notify</h1>
                     <hr/>

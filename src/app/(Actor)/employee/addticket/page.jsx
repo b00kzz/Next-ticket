@@ -18,7 +18,6 @@ const addTicket = () => {
   const api = process.env.API_ENDPOINT;
 
   useEffect(() => {
-    console.clear()
   }, []);
 
   const handleChange = (e) => {

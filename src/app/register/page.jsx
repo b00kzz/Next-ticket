@@ -29,7 +29,7 @@ const Register = () => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        cancelButtonText:'ยกเลิก',
+        cancelButtonText: 'ยกเลิก',
         confirmButtonText: 'ยืนยัน',
       }).then(async (result) => {
         if (result.isConfirmed) {
@@ -54,10 +54,7 @@ const Register = () => {
           })
         }
       })
-    } else {
-      //err
     }
-
   }
 
   return (

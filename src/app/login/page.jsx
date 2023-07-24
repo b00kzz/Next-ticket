@@ -17,13 +17,13 @@ export default function Login() {
       const res = await signIn("credentials", {
         username,
         password,
-      });
+      }).then((res)=>{
+        console.log(res.status)
+      })
+      e.preventdefalt()
     } catch (err) {
-      Swal.fire(
-        "Username or Password is incorrect",
-        "plase try again",
-        "warning"
-      );
+    console.log("🚀 ~ file: page.jsx:25 ~ handleSubmit ~ err:", err)
+
     }
   };
 

@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
+import { redirect } from "next/navigation";
 
 export default NextAuth({
   providers: [
@@ -43,6 +44,7 @@ export default NextAuth({
   ],
   pages: {
     signIn: "/login",
+    error: "/login-error"
   },
   callbacks: {
     async jwt({ token, user }) {
