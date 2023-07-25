@@ -51,7 +51,7 @@ const Contact = () => {
             {/* ///// */}
             <div className="items-center bg-gray-700/10 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
               <a href="#">
-                <img className="lg:ml-2 lg:rounded-lg h-46 w-96 sm:rounded-none sm:rounded-l-lg" src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/345036492_9312774782127149_764834869487276666_n.jpg?_nc_cat=109&cb=99be929b-3346023f&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHyTRDaX2m8D7MU8U1PfJAVQfZlYQSauJ9B9mVhBJq4nzOxsl3MrR_TrmuRwxFEJbXY_4GpWpC6aMn6goheUsCL&_nc_ohc=RefFyyXBDf4AX_jWCy7&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfDBmuw1na_c6yVHvGI8EXms_WGWKxTTa3_3HR1OuSyHkQ&oe=64A07D94" alt="Michael Avatar" />
+                <img className="lg:ml-2 lg:rounded-lg h-46 w-96 sm:rounded-none sm:rounded-l-lg" src="https://res.cloudinary.com/dxbbaikj5/image/upload/v1690223456/Morlam/vof0c9fegmgohubr879a.jpg" alt="Michael Avatar" />
               </a>
               <div className="p-5">
                 <h3 className="text-xl font-bold tracking-tight dark:text-white">
