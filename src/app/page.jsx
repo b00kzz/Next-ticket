@@ -7,7 +7,7 @@ export default function Home() {
       <section className="home_section">
         <h1 className="head_text text-center">
           ซื้อบัตรเข้าชมคอนเสิร์ตออนไลน์ง่ายๆ
-          <br className="max-md:hidden" />
+          <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">Morlam Ticket</span>
         </h1>
         </section>

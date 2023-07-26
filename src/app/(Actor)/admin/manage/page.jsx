@@ -15,7 +15,6 @@ import ExportExel from '@/components/ExportExel';
 
 
 
-
 const manage = () => {
   // const totalSales = item.reduce((total, currentItem) => total + currentItem.ticketprice, 0);
   const [error, setError] = useState(null);
@@ -30,10 +29,10 @@ const manage = () => {
   const api = process.env.API_ENDPOINT;
 
   useEffect(() => {
+    loadData();
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-    loadData();
     return () => {
       clearInterval(timer);
     };
@@ -121,7 +120,7 @@ const manage = () => {
           <div className="stat place-items-center">
             <div className="stat-title">จำนวนผู้ใช้ทั้งหมด</div>
             <div className="stat-value">{item.length}</div>
-            <div className="stat-desc">เวลาอ้างอิง: {currentTime.toLocaleTimeString()}</div>
+            <div className="stat-desc">วันที่อ้างอิง: {currentTime.toLocaleDateString()}</div>
           </div>
 
           <div className="stat place-items-center">

@@ -69,7 +69,7 @@ const HomePage = ({ }) => {
             <Fragment>
                 <div className="mt-2 relative container rounded-md lg:px-8 mx-auto bg-white/50">
                     <hr className="dark:border-gray-700/60" />
-                    <div className="px-4 sm:px-6 lg:px-8">
+                    <div className="px-4  lg:px-8">
                         <div className='grid grid-cols-2 gap-2'>
                             <h1 className="py-6 lg:text-2xl font-bold dark:text-white xs:text-xs">รายการการแสดงที่จะมาเร็วๆนี้</h1>
                             {/* <h2 className="text-2xl font-bold tracking-tight text-white">รายการที่เปิดขาย</h2> */}
