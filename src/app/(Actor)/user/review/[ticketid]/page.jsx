@@ -103,7 +103,7 @@ const reviewPage = () => {
         <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight dark:text-white">
-              รีวิวการซื้อสินค้า
+              {item.ticketname}
             </h2>
           </div>
 
@@ -117,7 +117,7 @@ const reviewPage = () => {
                   <input type='radio' className='hidden' name='revrank' id='rating-opt5' data-idx='0' value='5' onClick={(e) => handleChange(e)} />
                   <label for='rating-opt5'></label>
 
-                  <input type='radio'  className='hidden' name='revrank' id='rating-opt4' data-idx='1' value='4' onClick={(e) => handleChange(e)} />
+                  <input type='radio' className='hidden' name='revrank' id='rating-opt4' data-idx='1' value='4' onClick={(e) => handleChange(e)} />
                   <label for='rating-opt4'></label>
 
                   <input type='radio' className='hidden' name='revrank' id='rating-opt3' data-idx='2' value='3' onClick={(e) => handleChange(e)} />
@@ -156,7 +156,7 @@ const reviewPage = () => {
                       multiple
                       required
                       className="block w-full rounded-md border-0 py-0.5 dark:text-white shadow-sm ring-1 ring-inset ring-white-300 placeholder:dark:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" aria-describedby="file_input_help" id="file_input" type="file" />
-                      </div>
+                  </div>
                 </div>
                 <br />
                 <button
@@ -192,7 +192,7 @@ const reviewPage = () => {
                 <>
                   <div class='container bg-white rounded-lg shadow-lg p-10'>
                     <h1 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                      ภาพรายการ
+                      {item.ticketname}
                     </h1>
                     <img
                       class="mx-auto h-auto w-auto"

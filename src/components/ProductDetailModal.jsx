@@ -104,6 +104,7 @@ const ProductDetailModal = ({ isOpen, onClose, ticket }) => {
     return (
         <div className='modal-portal fixed top-0 left-0 w-screen h-screen bg-black/50 bg-opacity-25 flex justify-center items-center backdrop-blur-sm'>
             <div className="relative w-[40%] rounded-lg flex flex-col">
+            <button className='px-5 py-2.5 mr-5 justify-center items-center place-self-end text-white' onClick={() => onClose()}>ปิด X</button>
                 <div className="bg-white p-2 rounded-lg">
                     <h1 className='text-center text-2xl'>รายละเอียดตั๋ว</h1>
                     <hr />
@@ -225,10 +226,10 @@ const ProductDetailModal = ({ isOpen, onClose, ticket }) => {
                             </div>
                         </form>
                     </div>
-                    <hr />
-                    <div className="flex-center mt-2">
+                    {/* <hr /> */}
+                    {/* <div className="flex-center mt-2">
                         <button className='black_btn' onClick={() => onClose()}>ปิดหน้าต่าง</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
