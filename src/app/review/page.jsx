@@ -77,14 +77,14 @@ const review = () => {
                             </div>
 
                             <div className='container p-10'>
-                                <div className="sm:mt-0 flex items-center mb-4 space-x-4 mx-auto">
+                                <div className="sm:mt-0 flex flex-start mb-4 mx-auto">
                                     {user.map((user, index) => (
                                         <div key={index}>
                                             {user.userid === item.userid &&
 
-                                                <div className='justify-center items-center flex space-x-4'>
+                                                <div className='justify-center items-center flex'>
                                                     <img className="items-end text-end w-10 h-10 rounded-full" src={user.avatar} alt={user.nickname} />
-                                                    <div className="space-y-1 font-medium dark:text-white">
+                                                    <div className="space-y-1 ml-4 font-medium dark:text-white">
                                                         <p className="block text-md text-slate-800">{user.nickname}</p>
                                                     </div>
                                                 </div>

@@ -109,7 +109,7 @@ const Employee = () => {
             <section>
                 <div className="stats shadow flex-center">
                     <div className="stat place-items-center">
-                        <div className="stat-title">จำนวนผู้ใช้ทั้งหมด</div>
+                        <div className="stat-title">จำนวนผู้ที่สมัคเป็นพนักงาน</div>
                         <div className="stat-value">{item.length}</div>
                         <div className="stat-desc">เวลาอ้างอิง: {currentTime.toLocaleTimeString()}</div>
                     </div>
