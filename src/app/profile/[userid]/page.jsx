@@ -250,7 +250,7 @@ const profile = () => {
                                 <img
                                     className="mt-2 mx-auto h-auto w-auto"
                                     src={imageUrl}
-                                    alt="PromptPay"
+                                    alt="profile"
                                 />
                             </>
                         ) : (
@@ -261,7 +261,7 @@ const profile = () => {
                                 <img
                                     className="mt-2 mx-auto h-auto w-auto"
                                     src={session?.user.avatar}
-                                    alt="PromptPay"
+                                    alt="profile"
                                 />
                             </>
                         )}

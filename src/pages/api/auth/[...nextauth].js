@@ -56,6 +56,7 @@ export default NextAuth({
       return token
     },
     async session({ session, token }) {
+      // console.log("🚀 ~ file: [...nextauth].js:59 ~ session ~ token:", token)
       session.user = token.user
       return session
     },

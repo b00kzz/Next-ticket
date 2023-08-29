@@ -83,7 +83,8 @@ const manage = () => {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes Delete!',
+      confirmButtonText: 'ลบ',
+      cancelButtonText: 'ยกเลิก'
     }).then(async (result) => {
       if (result.isConfirmed) {
         axios.delete(api + "user/" + userid)
@@ -108,7 +109,7 @@ const manage = () => {
 
 
   const roles = [
-    { value: "Admin", label: 'Admin' },
+    // { value: "Admin", label: 'Admin' },
     { value: "Employee", label: 'Employee' },
     { value: "User", label: 'User' }
   ]
@@ -201,16 +202,24 @@ const manage = () => {
                     <td>{res.username}</td>
                     <td>{res.nickname}</td>
                     <td>
-                      <select className="form-select text-warning bg-gray-800 rounded-xl"
-                        value={res.roleid}
-                        key={index}
-                        onChange={(e) => handleChangesRole(e, res.userid)}
-                      >
-                        {roles.map((role, index) =>
 
-                          <option key={index} value={role.value}>{role.label}</option>
-                        )}
-                      </select>
+                      {res.roleid === "Admin" ? (
+                        <select className="form-select text-warning bg-gray-800 rounded-xl"
+                          value={res.roleid}
+                          onChange={(e) => handleChangesRole(e, res.userid)}
+                        >
+                          <option key={index} value={res.roleid}>{res.roleid}</option>
+                        </select>
+                      ) : (
+                        <select className="form-select text-warning bg-gray-800 rounded-xl"
+                          value={res.roleid}
+                          onChange={(e) => handleChangesRole(e, res.userid)}
+                        >
+                          {roles.map((role, index) =>
+                            <option key={index} value={role.value}>{role.label}</option>
+                          )}
+                        </select>
+                      )}
                     </td>
                     <td>
                       <label className="relative inline-flex items-center cursor-pointer">
@@ -239,7 +248,7 @@ const manage = () => {
                       {/* <a href={'/detail/' + res.userid}>
                   </a> */}
                       <button
-                        onClick={() => { setUser(res), setShowModal(true)}}
+                        onClick={() => { setUser(res), setShowModal(true) }}
 
                       >
                         <FaSearch className="ml-4 text-sky-600"></FaSearch>

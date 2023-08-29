@@ -14,8 +14,8 @@ import LineNotifyModal from './LineNotifyModal'
 
 const navigation = [
   { name: 'หน้าแรก', href: '/', current: true, icon: <AiFillHome /> },
+  { name: 'ซื้อบัตรคอนเสิร์ต', href: '/product', current: false, icon: 'home' },
   { name: 'รีวิว', href: '/review', current: false, icon: 'home' },
-  { name: 'ซื้อสินค้า', href: '/product', current: false, icon: 'home' },
   { name: 'ติดต่อ', href: '/contact', current: false, icon: 'home' },
 ]
 
@@ -28,25 +28,28 @@ export default function Navbar() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [user, setUser] = useState({})
-  const { data: session } = useSession()
+  const { data: session } = useSession();
+  const userId = session?.user?.userid;
   const api = process.env.API_ENDPOINT;
 
   useEffect(() => {
-    // loadData(userid)
-  }, []);
+    if (userId) {
+      loadData();
+    }
+  }, [userId]);
 
-  const loadData = async (userid) => {
-    const response = await axios.get(api + "user/" + userid)
-      .then(res => {
-
-        setUser(res.data)
-        setIsLoaded(true)
-
-      }).catch(err => {
-        setError(err)
-        // console.log(err);
-      })
-  }
+  const loadData = async () => {
+    try {
+      const response = await axios.get(`${api}user/${userId}`);
+      setUser(response.data);
+      setIsLoaded(true);
+      setError(null);
+    } catch (err) {
+      setError(err);
+      setUser(null);
+      setIsLoaded(true);
+    }
+  };
   // console.clear()
   const [showModal, setShowModal] = useState(false);
   return (
@@ -100,7 +103,7 @@ export default function Navbar() {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={session?.user.avatar}
+                              src={user.avatar}
                               alt=""
                             />
                           </Menu.Button>
