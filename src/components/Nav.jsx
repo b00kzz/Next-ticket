@@ -103,7 +103,7 @@ export default function Navbar() {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={user.avatar}
+                              src={user?.avatar}
                               alt=""
                             />
                           </Menu.Button>

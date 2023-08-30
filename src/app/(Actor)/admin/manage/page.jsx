@@ -139,13 +139,13 @@ const manage = () => {
         <div className='grid grid-cols-2 gap-2 mt-6'>
           <div className='flex space-x-2'>
             <h2 className="text-2xl mr-6 lg:font-bold tracking-tight dark:text-white xs:text-md xs:font-medium">จัดการผู้ใช้</h2>
-            <ExportPdf
+            {/* <ExportPdf
               name={"ผู้ใช้ในระบบ"}
               headers={["ไอดีผู้ใช้", "ชื่อผู้ใช้", "ชื่อเล่น", "อีเมล์", "บทบาท", "วันที่สมัคร"]}
               data={item.map(({ userid, username, nickname, email, roleid, createddate }) => {
                 return [userid, username, nickname, email, roleid, createddate]
               })}
-            />
+            /> */}
             <ExportExel
               name={"ผู้ใช้ในระบบ"}
               data={item}

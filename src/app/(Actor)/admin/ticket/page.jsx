@@ -186,13 +186,13 @@ const ticket = () => {
         <div className='ml-4 grid grid-cols-2 gap-2 mt-6'>
           <div className='flex space-x-2'>
             <h2 className="text-2xl lg:font-bold tracking-tight dark:text-white xs:text-md xs:font-medium">จัดการสินค้า</h2>
-            <ExportPdf
+            {/* <ExportPdf
               name={"การแสดง"}
               headers={["ไอดีตั๋ว", "ไอดีผู้ใช้", "ชื่อรายการ", "ราคา", "หมวดหมู่", "เพิ่มโดย"]}
               data={item.map(({ ticketid, userid, ticketname, ticketprice, tickettype, createdby }) => {
                 return [ticketid, userid, ticketname, ticketprice, tickettype, createdby]
               })}
-            />
+            /> */}
             <ExportExel
               name={"การแสดง"}
               data={item}
