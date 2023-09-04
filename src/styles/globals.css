@@ -10,6 +10,17 @@
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
 
+.colorChange {
+  color: rgba(255, 0, 0, 0.293);
+  animation: colorChangeAnimation 5s linear infinite;
+}
+
+@keyframes colorChangeAnimation {
+  to {
+    color: rgba(170, 255, 0, 0);
+  }
+}
+
 .main {
   width: 100vw;
   min-height: 100vh;

@@ -121,10 +121,10 @@ export default function Navbar() {
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
-                                  href={session?.user.roleid === 'Admin' ? '/admin/manage' : '/' && session?.user.roleid === 'Employee' ? '/employee/manage/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/history/' + session.user.userid : ''}
+                                  href={user?.roleid === 'Admin' ? '/admin/manage' : '/' && user?.roleid === 'Employee' ? '/employee/manage/' + user?.roleid : '/' && user?.roleid === 'User' ? '/user/history/' + user?.roleid : ''}
                                   className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                 >
-                                  {session?.user.roleid === 'Admin' ? 'หน้าแอดมิน' : session?.user.roleid === 'Employee' ? 'จัดการบัตร' : session?.user.roleid === 'User' ? 'ประวัติการทำรายการ' : ''}
+                                  {user?.roleid === 'Admin' ? 'หน้าแอดมิน' : user?.roleid === 'Employee' ? 'จัดการบัตร' : user?.roleid === 'User' ? 'ประวัติการทำรายการ' : ''}
                                 </Link>
                               )}
                             </Menu.Item>
@@ -139,26 +139,26 @@ export default function Navbar() {
                                 </Link>
                               )}
                             </Menu.Item>
-                            {session?.user.roleid === 'User' &&
+                            {user?.roleid === 'User' &&
                               <Menu.Item>
                                 {({ active }) => (
                                   <Link
-                                    href={session?.user.roleid === 'Employee' ? '/employee/manage/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/sellerregistration/' + session.user.userid : ''}
+                                    href={user?.roleid === 'Employee' ? '/employee/manage/' + session?.user.userid : '/' && user?.roleid === 'User' ? '/user/sellerregistration/' + session.user.userid : ''}
                                     className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                   >
-                                    {session?.user.roleid === 'Employee' ? 'แก้ไขข้อมูลผู้ขาย' : session?.user.roleid === 'User' ? 'ลงทะเบียนเป็นผู้ขาย' : ''}
+                                    {user?.roleid === 'Employee' ? 'แก้ไขข้อมูลผู้ขาย' : user?.roleid === 'User' ? 'ลงทะเบียนเป็นผู้ขาย' : ''}
                                   </Link>
                                 )}
                               </Menu.Item>
                             }
-                            {session?.user.roleid === 'Employee' &&
+                            {user?.roleid === 'Employee' &&
                               <Menu.Item>
                                 {({ active }) => (
                                   <Link
-                                    href={session?.user.roleid === 'Employee' ? '/employee/detail/' + session?.user.userid : '/' && session?.user.roleid === 'User' ? '/user/sellerregistration/' + session.user.userid : ''}
+                                    href={user?.roleid === 'Employee' ? '/employee/detail/' + session?.user.userid : '/' && user?.roleid === 'User' ? '/user/sellerregistration/' + session.user.userid : ''}
                                     className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                   >
-                                    {session?.user.roleid === 'Employee' ? 'แก้ไขข้อมูลผู้ขาย' : session?.user.roleid === 'User' ? 'ลงทะเบียนเป็นผู้ขาย' : ''}
+                                    {user?.roleid === 'Employee' ? 'แก้ไขข้อมูลผู้ขาย' : user?.roleid === 'User' ? 'ลงทะเบียนเป็นผู้ขาย' : ''}
                                   </Link>
                                 )}
                               </Menu.Item>
