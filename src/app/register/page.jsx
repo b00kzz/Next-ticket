@@ -13,6 +13,7 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [nickname, setNickname] = useState('')
+  const api = process.env.API_ENDPOINT;
 
   const handleSubmit = async (e) => {
     // e.preventDefault();
@@ -33,7 +34,7 @@ const Register = () => {
         confirmButtonText: 'ยืนยัน',
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await fetch("http://localhost:8088/v1/register", {
+          const resp = await fetch(api + "register", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -45,13 +46,33 @@ const Register = () => {
               email: email,
             }),
           });
-          Swal.fire(
-            'สำเร็จ!',
-            'สมัครสมาชิกเรียบร้อยแล้ว',
-            'success'
-          ).then(() => {
-            window.location.replace('/')
-          })
+          const data = await resp.json();
+          if (data.code === "80001") {
+            //console.log(data.message); // "System Error"
+            //console.log(data.description); // "Cannot save user"
+            // ใส่โค้ดที่คุณต้องการทำหลังจากสมัครไม่สำเร็จที่นี่
+            try {
+              Swal.fire(
+                'ลงทะเบียนไม่สำเร็จ!',
+                'เนื่องจากมีผู้ใช้นี้ในระบบแล้ว',
+                'warning'
+              ).then(() => {
+                window.location.replace('/register')
+              })
+            } catch (error) {
+              console.log("🚀 ~ file: page.jsx:56 ~ handleSubmit ~ error:", error)
+            }
+          } else {
+            // กรณีอื่นๆ ที่สมัครไม่สำเร็จ
+            // ใส่โค้ดที่คุณต้องการทำหลังจากสมัครไม่สำเร็จที่นี่
+            Swal.fire(
+              'สำเร็จ!',
+              'ระบบได้ทำการลงทะเบียนเรียบร้อยแล้ว',
+              'success'
+            ).then(() => {
+              window.location.replace('/')
+            })
+          }
         }
       })
     }

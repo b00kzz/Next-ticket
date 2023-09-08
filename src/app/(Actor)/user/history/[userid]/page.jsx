@@ -108,9 +108,9 @@ const history = () => {
                 <th scope="col" className="px-6 py-3">
                   รีวิวรายการ
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   ลบรายการ
-                </th>
+                </th> */}
               </tr>
             </thead>
             {item.map((res, index) => (
@@ -132,8 +132,11 @@ const history = () => {
 
                   <td className="px-6 py-3">
                     <div >
-                      <div className="p-1 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                        <span className="flex rounded-full bg-red-950 uppercase px-2 py-1 text-xs font-bold mr-3">New</span>
+                      <div className={`p-1 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-2xl flex lg:inline-flex`} role="alert"
+                        // className={`p-1 ${res.paymentstatus === "กำลังดำเนินการ" ? 'bg-blue-700' : res.paymentstatus === "ทำรายการสำเร็จ" ? 'bg-green-800' : res.paymentstatus === "สลิปไม่ถูกต้อง" ? 'bg-red-600' : ""
+                        //   } items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex`} role="alert"
+                      >
+                        <span className="flex rounded-full bg-red-900 uppercase px-2 py-1 text-xs font-bold mr-3">New</span>
                         <span className="font-semibold mr-2 text-left flex-auto">{res.paymentstatus}</span>
                       </div>
                     </div>
@@ -174,11 +177,11 @@ const history = () => {
                       )
                     }
                   </td>
-                  <td className="px-6 py-3" >
+                  {/* <td className="px-6 py-3" >
                     <button onClick={() => handleDelete(res.payid)}>
                     <FaTrashAlt className="text-danger"></FaTrashAlt>
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               </tbody>
             ))}

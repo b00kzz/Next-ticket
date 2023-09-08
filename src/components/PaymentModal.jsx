@@ -59,7 +59,7 @@ const PaymentModal = ({ isOpen, onClose, detail, userid }) => {
                             subject: detail.ticketname,
                             body: `${detail.ticketname} ลิ้งรับชม:${detail.ticketrepo}`,
                             to: item.email,
-                            image: "https://res.cloudinary.com/dxbbaikj5/image/upload/v1689578414/Morlam/rhhs0v0accks9dkoqwjc.jpg",
+                            image: "https://res.cloudinary.com/dxbbaikj5/image/upload/v1694179486/Morlam/dfy59iggvvjamyyufbii.jpg",
                         }).then(res => {
                             window.location.reload();
                             onClose();

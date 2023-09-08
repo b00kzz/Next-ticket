@@ -1,7 +1,7 @@
 "use client"
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { render } from 'react-dom';
 import { PacmanLoader } from 'react-spinners';
 import Swal from 'sweetalert2';
@@ -14,7 +14,24 @@ const Registration = ({ userdetail }) => {
     const [formData, setFormData] = useState([])
     const [imageFile, setImageFile] = useState([])
     const [imageUrl, setImageUrl] = useState([])
+    const [usernameExists, setUsernameExists] = useState(false);
+    // const [lastnameExists, setLastnameExists] = useState(false);
+    const [userList, setUserList] = useState([]);
     const api = process.env.API_ENDPOINT;
+
+
+    useEffect(() => {
+        // ดึงข้อมูลผู้ใช้จาก API และอัพเดต state
+        const fetchUserList = async () => {
+            try {
+                const response = await axios.get(api + "userdetails");
+                setUserList(response.data); // สมมุติว่า API ส่งข้อมูลเป็น array ของผู้ใช้
+            } catch (error) {
+                console.error("Error fetching user list:", error);
+            }
+        };
+        fetchUserList();
+    }, []);
     const handleChange = (e) => {
 
         if (e.target.name === "file") {
@@ -31,7 +48,46 @@ const Registration = ({ userdetail }) => {
         })
     }
 
+    const handleUsernameChange = async (e) => {
+        const newUsername = e.target.value;
+
+        if (newUsername) {
+            const usernamesInSystem = userList.map(user => user.firstname); // ดึงชื่อผู้ใช้จากข้อมูลผู้ใช้ในระบบ
+            setUsernameExists(usernamesInSystem.includes(newUsername));
+        } else {
+            setUsernameExists(false);
+        }
+    };
+    // const handleLnameChange = async (e) => {
+    //     const newUsername = e.target.value;
+
+    //     if (newUsername) {
+    //         const usernamesInSystem = userList.map(user => user.lastname); // ดึงชื่อผู้ใช้จากข้อมูลผู้ใช้ในระบบ
+    //         setLastnameExists(usernamesInSystem.includes(newUsername));
+    //     } else {
+    //         setLastnameExists(false);
+    //     }
+    // };
+
     const handleSubmit = async (e) => {
+        e.preventDefault();
+        // ตรวจสอบว่า username มีในระบบแล้วหรือไม่
+        if (usernameExists) {
+            Swal.fire({
+                icon: "error",
+                title: "Username นี้ถูกใช้แล้ว",
+                confirmButtonColor: "red",
+            });
+            return;
+        }
+        // if (lastnameExists) {
+        //     Swal.fire({
+        //         icon: "error",
+        //         title: "lastnameExists นี้ถูกใช้แล้ว",
+        //         confirmButtonColor: "red",
+        //     });
+        //     return;
+        // }
         Swal.fire({
             title: "กำลังอัพโหลดข้อมูล",
             html: '<div class="flex-center overflow-y-hidden" id="loading-spinner"></div>',
@@ -104,10 +160,17 @@ const Registration = ({ userdetail }) => {
                                         name='firstname'
                                         defaultValue={userdetail.firstname}
                                         placeholder='กรุณากรอกชื่อให้ตรงกับบัตร'
-                                        onChange={(e) => handleChange(e)}
-                                        className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        onChange={(e) => {
+                                            handleUsernameChange(e);
+                                            handleChange(e); // เรียกใช้ฟังก์ชัน handleChange เหมือนเดิม
+                                        }}
+                                        className={`block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ${usernameExists ? "ring-red-500" : "ring-gray-300"
+                                            } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:${usernameExists ? "ring-red-600" : "ring-indigo-600"} sm:text-sm sm:leading-6`}
                                     />
                                 </div>
+                                {usernameExists && (
+                                    <p className="text-xs mt-1 text-red-600">ชื่อนี้ได้ทำการลงทะเบียนไปแล้ว</p>
+                                )}
                             </div>
                             <div>
                                 <label htmlFor="lastname" className="block text-sm font-medium leading-6 dark:text-white">
@@ -119,9 +182,11 @@ const Registration = ({ userdetail }) => {
                                         name='lastname'
                                         defaultValue={userdetail.lastname}
                                         placeholder='กรุณากรอกนามสกุลให้ตรงกับบัตร'
-                                        onChange={(e) => handleChange(e)}
-                                        className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
+                                        onChange={(e) => {
+                                            handleChange(e); // เรียกใช้ฟังก์ชัน handleChange เหมือนเดิม
+                                        }}
+                                        className={`block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300
+                                             placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`} />
                                 </div>
                             </div>
                             <div>
@@ -195,6 +260,7 @@ const Registration = ({ userdetail }) => {
                             </div>
                             <div>
                                 <button
+                                    disabled={usernameExists} // กำหนดให้ปุ่มไม่สามารถกดได้เมื่อ username ซ
                                     type="submit"
                                     className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
